@@ -5,4 +5,3 @@ enum class Horizontal {
 
     infix fun `is`(direction: Horizontal): Boolean = this == direction
 }
-}
