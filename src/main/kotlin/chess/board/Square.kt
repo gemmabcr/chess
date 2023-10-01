@@ -5,8 +5,8 @@ import chess.position.Column
 import chess.position.Row
 
 class Square(
-    private val column: Column,
-    private val row: Row
+    val column: Column,
+    val row: Row
 ) {
     private val color: Color = setColor()
 
@@ -23,4 +23,6 @@ class Square(
     private fun rowIsPair(): Boolean {
         return row.ordinal % 2 != 0
     }
+
+    fun add(columnMove: Int, rowMove: Int): Square = Square(column.add(columnMove), row.add(rowMove))
 }

@@ -1,9 +1,8 @@
-package chess
+package chess.piece
 
 import chess.board.Square
-import chess.piece.Piece
 
-data class Movement(
+data class PieceDestination(
     private val piece: Piece,
     private val destination: Square
 ) {}

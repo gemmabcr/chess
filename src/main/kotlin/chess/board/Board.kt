@@ -1,7 +1,7 @@
 package chess.board
 
 import chess.Color
-import chess.Movement
+import chess.piece.PieceDestination
 import chess.piece.*
 import chess.position.Column
 import chess.position.Row
@@ -37,7 +37,7 @@ class Board {
         else -> King(color, Square(column, row))
     }
 
-    fun isValid(move: Movement): Boolean {
+    fun isValid(move: PieceDestination): Boolean {
         TODO()
     }
 

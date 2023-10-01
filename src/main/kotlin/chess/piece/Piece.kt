@@ -6,4 +6,6 @@ import chess.board.Square
 abstract class Piece(
     private val color: Color,
     private val square: Square
-) {}
+) {
+    abstract fun mainMove(): List<Square>
+}
