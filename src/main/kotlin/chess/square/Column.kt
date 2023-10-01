@@ -6,7 +6,7 @@ enum class Column {
     infix fun `is`(column: Column): Boolean = this == column
     fun maxRightMovement(): Int = H.ordinal - this.ordinal
     fun maxLeftMovement(): Int = this.ordinal
-    fun add(columnMove: Int): Column = entries[this.ordinal + columnMove]
+    fun move(columnMove: Int): Column = entries[this.ordinal + columnMove]
     fun canMoveRight(): Boolean = this.ordinal < H.ordinal
     fun canMoveLeft(): Boolean = this.ordinal > A.ordinal
 

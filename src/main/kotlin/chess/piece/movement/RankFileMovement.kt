@@ -32,7 +32,7 @@ class RankFileMovement(
             }
             for (i in 1..maxRankMovement) {
                 possibleMoves.add(
-                    square.add(
+                    square.move(
                         0,
                         getRankIndex(vertical, i)
                     )
@@ -51,7 +51,7 @@ class RankFileMovement(
             }
             for (i in 1..maxFileMovement) {
                 possibleMoves.add(
-                    square.add(
+                    square.move(
                         getFileIndex(horizontal, i),
                         0
                     )

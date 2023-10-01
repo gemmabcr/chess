@@ -22,7 +22,7 @@ class Square(
         return row.ordinal % 2 != 0
     }
 
-    fun add(columnMove: Int, rowMove: Int): Square = Square(column.add(columnMove), row.add(rowMove))
+    fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
 
     fun canMoveUp(): Boolean = row.canMoveUp()
     fun canMoveRight(): Boolean = column.canMoveRight()

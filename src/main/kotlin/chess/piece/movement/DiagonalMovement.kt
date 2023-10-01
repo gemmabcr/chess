@@ -32,7 +32,7 @@ class DiagonalMovement(
             }
             for (i in 1..maxDiagonalMovement) {
                 possibleMoves.add(
-                    square.add(
+                    square.move(
                         getColumnIndex(horizontal, i),
                         getRowIndex(vertical, i)
                     )

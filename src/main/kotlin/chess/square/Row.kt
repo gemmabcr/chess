@@ -5,7 +5,7 @@ enum class Row {
 
     fun maxUpMovement(): Int = EIGHT.ordinal - this.ordinal
     fun maxDownMovement(): Int = this.ordinal
-    fun add(rowMove: Int): Row = entries[this.ordinal + rowMove]
+    fun move(rowMove: Int): Row = entries[this.ordinal + rowMove]
     fun canMoveUp(): Boolean = this.ordinal < EIGHT.ordinal
     fun canMoveDown(): Boolean = this.ordinal > ONE.ordinal
 
