@@ -1,7 +1,9 @@
 package chess
 
-class Turn {
-    private val players: Pair<Player, Player> = Pair(Player(Color.WHITE), Player(Color.BLACK))
+import chess.player.Player
+
+class Turn(private val players: Pair<Player, Player>) {
+
     private var currentTurn: Int = 1
 
     fun activePlayer(): Player = when {
