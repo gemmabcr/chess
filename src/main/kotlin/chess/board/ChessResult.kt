@@ -1,0 +1,16 @@
+package chess.board
+
+enum class ChessResult {
+    CHECKMATE,
+    CHECK,
+    RESIGNATION,
+    WIN_ON_TIME,
+    FORFEIT,
+    STALEMATE,
+    DEAD_POSITION,
+    DRAW_BY_AGREEMENT,
+    THREEFOLD_REPETITION,
+    FIFTY_MOVE,
+    DRAW_ON_TIME,
+    DRAW_ON_RESIGNATION
+}
