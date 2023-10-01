@@ -7,7 +7,5 @@ class Rook(
     private val color: Color,
     private val square: Square
 ): Piece(color, square) {
-    override fun mainMove(): List<Square> {
-        TODO("Not yet implemented")
-    }
+    override fun mainMove(): List<Square> = possibleRankFileMoves()
 }
