@@ -8,38 +8,35 @@ class King(
     private val square: Square
 ): Piece(color, square) {
     override fun mainMove(): List<Square> {
-        val maxRightRowMovement = square.row.maxUpMovement()
-        val maxLeftRowMovement = square.row.maxDownMovement()
-        val maxUpColumnMovement = square.column.maxRightMovement()
-        val maxDownColumnMovement = square.column.maxLeftMovement()
-
-        val canMoveRight = maxRightRowMovement >= 1;
-        val canMoveLeft = maxLeftRowMovement >= 1;
-        val canMoveUp = maxUpColumnMovement >= 1;
-        val canMoveDown = maxDownColumnMovement >= 1;
-
         val possibleMoves: MutableList<Square> = mutableListOf()
-        if (canMoveRight) {
-            possibleMoves.add(square.add(0, 1))
-        }
-        if (canMoveRight && canMoveUp) {
-            possibleMoves.add(square.add(1, 1))
-        }
-        if (canMoveUp) {
+
+        if (square.canMoveUp()) {
             possibleMoves.add(square.add(1, 0))
         }
-        if (canMoveLeft && canMoveUp) {
+        if (square.canMoveUp() && square.canMoveRight()) {
+            possibleMoves.add(square.add(1, 1))
+        }
+        if (square.canMoveUp() && square.canMoveLeft()) {
             possibleMoves.add(square.add(1, -1))
         }
-        if (canMoveLeft) {
+
+        if (square.canMoveRight()) {
+            possibleMoves.add(square.add(0, 1))
+        }
+        if (square.canMoveLeft()) {
             possibleMoves.add(square.add(0, -1))
         }
-        if (canMoveLeft && canMoveDown) {
-            possibleMoves.add(square.add(-1, -1))
-        }
-        if (canMoveDown) {
+
+        if (square.canMoveDown()) {
             possibleMoves.add(square.add(-1, 0))
         }
+        if (square.canMoveDown() && square.canMoveRight()) {
+            possibleMoves.add(square.add(-1, 1))
+        }
+        if (square.canMoveDown() && square.canMoveLeft()) {
+            possibleMoves.add(square.add(-1, -1))
+        }
+
         return possibleMoves
     }
 }

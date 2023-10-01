@@ -5,8 +5,8 @@ import chess.position.Column
 import chess.position.Row
 
 class Square(
-    val column: Column,
-    val row: Row
+    private val column: Column,
+    private val row: Row
 ) {
     private val color: Color = setColor()
 
@@ -25,4 +25,14 @@ class Square(
     }
 
     fun add(columnMove: Int, rowMove: Int): Square = Square(column.add(columnMove), row.add(rowMove))
+
+    fun canMoveUp(): Boolean = row.canMoveUp()
+    fun canMoveRight(): Boolean = column.canMoveRight()
+    fun canMoveDown(): Boolean = row.canMoveDown()
+    fun canMoveLeft(): Boolean = column.canMoveLeft()
+
+    fun maxUpMovement(): Int = row.maxUpMovement()
+    fun maxRightMovement(): Int = column.maxRightMovement()
+    fun maxDownMovement(): Int = row.maxDownMovement()
+    fun maxLeftMovement(): Int = column.maxLeftMovement()
 }
