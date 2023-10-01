@@ -1,7 +1,7 @@
 package chess.piece
 
 import chess.Color
-import chess.board.Square
+import chess.square.Square
 
 class King(
     private val color: Color,
@@ -10,30 +10,30 @@ class King(
     override fun mainMove(): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
 
-        if (square.canMoveUp()) {
+        if (canMoveUp) {
             possibleMoves.add(square.add(1, 0))
         }
-        if (square.canMoveUp() && square.canMoveRight()) {
+        if (canMoveUp && canMoveRight) {
             possibleMoves.add(square.add(1, 1))
         }
-        if (square.canMoveUp() && square.canMoveLeft()) {
+        if (canMoveUp && canMoveLeft) {
             possibleMoves.add(square.add(1, -1))
         }
 
-        if (square.canMoveRight()) {
+        if (canMoveRight) {
             possibleMoves.add(square.add(0, 1))
         }
-        if (square.canMoveLeft()) {
+        if (canMoveLeft) {
             possibleMoves.add(square.add(0, -1))
         }
 
-        if (square.canMoveDown()) {
+        if (canMoveDown) {
             possibleMoves.add(square.add(-1, 0))
         }
-        if (square.canMoveDown() && square.canMoveRight()) {
+        if (canMoveDown && canMoveRight) {
             possibleMoves.add(square.add(-1, 1))
         }
-        if (square.canMoveDown() && square.canMoveLeft()) {
+        if (canMoveDown && canMoveLeft) {
             possibleMoves.add(square.add(-1, -1))
         }
 

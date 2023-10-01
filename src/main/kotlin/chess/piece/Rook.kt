@@ -1,7 +1,7 @@
 package chess.piece
 
 import chess.Color
-import chess.board.Square
+import chess.square.Square
 
 class Rook(
     private val color: Color,

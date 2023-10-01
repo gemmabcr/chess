@@ -3,8 +3,9 @@ package chess.board
 import chess.Color
 import chess.piece.PieceDestination
 import chess.piece.*
-import chess.position.Column
-import chess.position.Row
+import chess.square.Column
+import chess.square.Row
+import chess.square.Square
 
 class Board {
     private val squares: List<List<Square>> = createBoard()

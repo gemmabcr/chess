@@ -1,6 +1,6 @@
 package chess.piece
 
-import chess.board.Square
+import chess.square.Square
 
 data class PieceDestination(
     private val piece: Piece,

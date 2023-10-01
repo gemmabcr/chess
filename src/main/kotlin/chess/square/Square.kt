@@ -1,8 +1,6 @@
-package chess.board
+package chess.square
 
 import chess.Color
-import chess.position.Column
-import chess.position.Row
 
 class Square(
     private val column: Column,
