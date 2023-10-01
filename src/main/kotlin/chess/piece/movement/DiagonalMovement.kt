@@ -1,4 +1,4 @@
-package chess.piece
+package chess.piece.movement
 
 import chess.square.Square
 import chess.square.direction.Horizontal
@@ -12,22 +12,25 @@ class DiagonalMovement(
     private val canMoveDownLeft = square.canMoveDown() && square.canMoveLeft()
     private val canMoveUpLeft = square.canMoveUp() && square.canMoveLeft()
 
+    fun possibleMoves(maxMove: Int): List<Square> {
+        val movesList: MutableList<Square> = mutableListOf()
 
-    fun possibleDiagonalMoves(): List<Square> {
-        val possibleMoves: MutableList<Square> = mutableListOf()
+        diagonalSquares(Vertical.UP, Horizontal.RIGHT, maxMove).forEach { square -> movesList.add(square) }
+        diagonalSquares(Vertical.UP, Horizontal.LEFT, maxMove).forEach { square -> movesList.add(square) }
+        diagonalSquares(Vertical.DOWN, Horizontal.RIGHT, maxMove).forEach { square -> movesList.add(square) }
+        diagonalSquares(Vertical.DOWN, Horizontal.LEFT, maxMove).forEach { square -> movesList.add(square) }
 
-        diagonalSquares(Vertical.UP, Horizontal.RIGHT).forEach { square -> possibleMoves.add(square) }
-        diagonalSquares(Vertical.UP, Horizontal.LEFT).forEach { square -> possibleMoves.add(square) }
-        diagonalSquares(Vertical.DOWN, Horizontal.RIGHT).forEach { square -> possibleMoves.add(square) }
-        diagonalSquares(Vertical.DOWN, Horizontal.LEFT).forEach { square -> possibleMoves.add(square) }
-
-        return possibleMoves.toList()
+        return movesList.toList()
     }
 
-    private fun diagonalSquares(vertical: Vertical, horizontal: Horizontal): List<Square> {
+    private fun diagonalSquares(vertical: Vertical, horizontal: Horizontal, maxMove: Int): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
         if (canMoveDiagonally(vertical, horizontal)) {
-            for (i in 1..maxDiagonalMove(vertical, horizontal)) {
+            val maxDiagonalMovement = when {
+                maxMove != 8 -> maxMove
+                else -> maxDiagonalMove(vertical, horizontal)
+            }
+            for (i in 1..maxDiagonalMovement) {
                 possibleMoves.add(
                     square.add(
                         getColumnIndex(horizontal, i),

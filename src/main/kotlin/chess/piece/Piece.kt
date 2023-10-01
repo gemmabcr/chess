@@ -1,24 +1,18 @@
 package chess.piece
 
 import chess.Color
+import chess.piece.movement.DiagonalMovement
+import chess.piece.movement.RankFileMovement
 import chess.square.Square
 
 abstract class Piece(
     private val color: Color,
     private val square: Square
 ) {
-    protected val rowsUp = square.maxUpMovement()
-    protected val rowsDown = square.maxDownMovement()
-    protected val columnsRight = square.maxRightMovement()
-    protected val columnsLeft = square.maxLeftMovement()
-
-    protected val canMoveUp = square.canMoveUp()
-    protected val canMoveRight = square.canMoveRight()
-    protected val canMoveDown = square.canMoveDown()
-    protected val canMoveLeft = square.canMoveLeft()
-
     private val diagonalMovement: DiagonalMovement = DiagonalMovement(square)
+    private val rankFileMovement: RankFileMovement = RankFileMovement(square)
 
     abstract fun mainMove(): List<Square>
-    fun possibleDiagonalMoves(): List<Square> = diagonalMovement.possibleDiagonalMoves()
+    fun possibleDiagonalMoves(maxMove: Int = 8): List<Square> = diagonalMovement.possibleMoves(maxMove)
+    fun possibleRankFileMoves(maxMove: Int = 8): List<Square> = rankFileMovement.possibleMoves(maxMove)
 }

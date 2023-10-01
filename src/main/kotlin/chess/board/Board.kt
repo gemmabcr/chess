@@ -1,7 +1,7 @@
 package chess.board
 
 import chess.Color
-import chess.piece.PieceDestination
+import chess.piece.movement.PieceDestination
 import chess.piece.*
 import chess.square.Column
 import chess.square.Row
