@@ -15,4 +15,7 @@ class Queen(
 
         return possibleMoves.toList()
     }
+    override fun journey(destination: Square): List<Square> {
+        TODO("Not yet implemented")
+    }
 }

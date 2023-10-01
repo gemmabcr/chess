@@ -42,4 +42,5 @@ class Knight(
 
         return movesList.toList()
     }
+    override fun journey(destination: Square): List<Square> = emptyList()
 }

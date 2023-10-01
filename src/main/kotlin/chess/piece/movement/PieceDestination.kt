@@ -4,6 +4,6 @@ import chess.piece.Piece
 import chess.square.Square
 
 data class PieceDestination(
-    private val piece: Piece,
-    private val destination: Square
+    val piece: Piece,
+    val destination: Square
 ) {}

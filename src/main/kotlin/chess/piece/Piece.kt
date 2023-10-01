@@ -14,9 +14,11 @@ abstract class Piece(
     private val diagonalMovement: DiagonalMovement = DiagonalMovement(square)
     private val rankFileMovement: RankFileMovement = RankFileMovement(square)
 
-    fun `is`(color: Color): Boolean = this.color == color
-
     abstract fun mainMove(): List<Square>
+    abstract fun journey(destination: Square): List<Square>
+
+    fun `is`(color: Color): Boolean = this.color == color
+    fun isValid(destination: Square): Boolean = mainMove().contains(destination)
 
     fun randomMove(): Square {
         val moves = mainMove()

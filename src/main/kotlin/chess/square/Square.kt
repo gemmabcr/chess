@@ -23,6 +23,8 @@ class Square(
     }
 
     fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
+    fun differenceColRow(destination: Square): Pair<Int, Int> =
+        Pair(destination.column.ordinal - column.ordinal, destination.row.ordinal - row.ordinal)
 
     fun canMoveUp(): Boolean = row.canMoveUp()
     fun canMoveRight(): Boolean = column.canMoveRight()

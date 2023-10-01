@@ -11,4 +11,7 @@ class Pawn(
         square.canMoveUp() -> listOf(square.move(0,1))
         else -> emptyList()
     }
+    override fun journey(destination: Square): List<Square> {
+        TODO("Not yet implemented")
+    }
 }

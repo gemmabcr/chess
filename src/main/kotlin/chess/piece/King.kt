@@ -7,7 +7,6 @@ class King(
     private val color: Color,
     private val square: Square
 ): Piece(color, square) {
-
     override fun mainMove(): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
 
@@ -15,5 +14,8 @@ class King(
         possibleRankFileMoves(1).forEach { square -> possibleMoves.add(square) }
 
         return possibleMoves
+    }
+    override fun journey(destination: Square): List<Square> {
+        TODO("Not yet implemented")
     }
 }
