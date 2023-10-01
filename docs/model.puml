@@ -1,0 +1,80 @@
+@startuml
+
+class Chess
+class Player
+class Turn
+class Board
+class Result
+class Pieces
+
+class CheckMate
+class Resignation
+
+abstract class Piece
+enum Color {
+    WHITE
+    BLACK
+}
+class KingPiece
+class QueenPiece
+class RookPiece
+class BishopPiece
+class KnightPiece
+class PawnPiece
+class PieceMovement
+
+class Square
+enum Column {
+    ONE
+    TWO
+    THREE
+    FOUR
+    FIVE
+    SIX
+    SEVEN
+    EIGHTH
+}
+enum Row {
+    A
+    B
+    C
+    D
+    E
+    F
+    G
+}
+
+Chess *--> Board
+Chess *-- Turn
+Chess o--> Pieces
+Turn "2" *--> Player
+
+Player *--> Result
+Resignation -up-|> Result
+CheckMate -up-|> Result
+
+Board *--> "8x8" Square
+Pieces o-up-> "12" Piece
+Piece o-up-> Square
+Square -- Row
+Square -- Column
+Square -- Color
+
+Piece -- Color
+Player -- Color
+KingPiece -up-|> Piece
+QueenPiece -up-|> "0..1" Piece
+RookPiece -up-|> "0..2" Piece
+BishopPiece -up-|> "0..2" Piece
+KnightPiece -up-|> "0..2" Piece
+PawnPiece -up-|> "0..8" Piece
+
+Player ..> PieceMovement
+PieceMovement *--> Piece
+PieceMovement *--> Square
+
+PieceMovement <|-- Castling
+PieceMovement <|-- EnPassant
+PieceMovement <|-- Promotion
+
+@enduml
