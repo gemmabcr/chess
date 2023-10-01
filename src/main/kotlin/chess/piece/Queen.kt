@@ -1,9 +1,9 @@
 package chess.piece
 
 import chess.Color
-import chess.position.Position
+import chess.board.Square
 
 class Queen(
     private val color: Color,
-    private val position: Position
-): Piece(color, position)
+    private val square: Square
+): Piece(color, square)
