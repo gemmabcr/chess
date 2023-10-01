@@ -2,8 +2,6 @@ package chess.piece
 
 import chess.Color
 import chess.square.Square
-import chess.square.direction.Horizontal
-import chess.square.direction.Vertical
 
 class Knight(
     private val color: Color,
