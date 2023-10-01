@@ -18,6 +18,7 @@ abstract class Piece(
     abstract fun journey(destination: Square): List<Square>
 
     fun `is`(color: Color): Boolean = this.color == color
+    fun `is`(square: Square): Boolean = this.square == square
     fun isValid(destination: Square): Boolean = mainMove().contains(destination)
 
     fun randomMove(): Square {

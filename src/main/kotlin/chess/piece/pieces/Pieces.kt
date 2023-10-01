@@ -4,6 +4,7 @@ import chess.Color
 import chess.board.ChessResult
 import chess.piece.Piece
 import chess.piece.movement.PieceDestination
+import chess.square.Square
 
 class Pieces {
     private val pieces: MutableList<Piece> = InitialPieces.setUp()
@@ -18,8 +19,10 @@ class Pieces {
             return false
         }
         val journey = movement.piece.journey(movement.destination)
-        TODO("Not yet implemented")
+        return journey.find { square -> isPlenty(square) } == null
     }
+
+    private fun isPlenty(square: Square): Boolean = pieces.find { piece -> piece.`is`(square) } != null
 
     fun hasResult(): Boolean {
         TODO("Not yet implemented")
