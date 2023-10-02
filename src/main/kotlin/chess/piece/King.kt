@@ -15,7 +15,5 @@ class King(
 
         return possibleMoves
     }
-    override fun journey(destination: Square): List<Square> {
-        TODO("Not yet implemented")
-    }
+    override fun journey(destination: Square): List<Square> = emptyList()
 }
