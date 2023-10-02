@@ -15,14 +15,14 @@ class Bishop(
         val differenceRow = moves.second
 
         val movesList: MutableList<Square> = mutableListOf()
-            for (i in 1 .. getMaxFor(differenceCol)) {
-                movesList.add(
-                    square.move(
-                        getIndex(differenceCol, i),
-                        getIndex(differenceRow, i)
-                    )
+        for (i in 1 .. getMaxFor(differenceCol)) {
+            movesList.add(
+                square.move(
+                    getIndex(differenceCol, i),
+                    getIndex(differenceRow, i)
                 )
-            }
+            )
+        }
         return movesList.toList()
     }
 
