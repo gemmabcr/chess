@@ -1,6 +1,6 @@
 package chess.ui
 
-import chess.board.ChessResult
+import chess.ChessResult
 import chess.piece.Piece
 import chess.square.Square
 
