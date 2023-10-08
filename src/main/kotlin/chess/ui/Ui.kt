@@ -16,4 +16,8 @@ class Ui {
     fun print(result: ChessResult) {
         TODO("Not yet implemented")
     }
+
+    fun print(board: List<List<Square>>) {
+        TODO("Not yet implemented")
+    }
 }

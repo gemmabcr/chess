@@ -27,8 +27,12 @@ class Chess {
 
     private fun startGame() {
         do {
+            ui.print(board)
             val player = turn.activePlayer()
             validMove(player)
+            if (pieces.isCheck()) {
+                ui.print(pieces.result())
+            }
             turn.next()
         } while(pieces.hasResult())
         ui.print(pieces.result())
