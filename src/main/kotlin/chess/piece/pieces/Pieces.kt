@@ -59,10 +59,9 @@ class Pieces {
         }
         val kingMovements = teamPieces.find { it.isKing() }!!.mainMove()
         val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove() }
-        val isCheckMate = kingMovements.filter { kingMovement ->
+        return kingMovements.all { kingMovement ->
             enemiesMovements.any { it.`is`(kingMovement) }
-        }.size == kingMovements.size
-        return isCheckMate
+        }
     }
 
     fun result(): ChessResult {
