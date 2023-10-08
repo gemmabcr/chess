@@ -31,8 +31,7 @@ class Pieces {
     private fun isPlenty(square: Square): Boolean = allPieces().find { piece -> piece.`is`(square) } != null
 
     fun hasResult(): Boolean {
-        return isCheck(Color.BLACK) || isCheck(Color.WHITE)
-        // TODO: is check mate
+        return isCheck(Color.BLACK) || isCheck(Color.WHITE) || isCheckMate(Color.BLACK) || isCheckMate(Color.WHITE)
     }
 
     private fun isCheck(kingColor: Color): Boolean {
@@ -47,6 +46,23 @@ class Pieces {
         val kingPosition = teamPieces.find { it.isKing() }!!.getPosition()
         val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove() }
         return enemiesMovements.find { movement -> movement.`is`(kingPosition) } != null
+    }
+
+    private fun isCheckMate(kingColor: Color): Boolean {
+        val teamPieces = when (kingColor) {
+            Color.WHITE -> whitePieces
+            else -> blackPieces
+        }
+        val enemiesPieces = when (kingColor) {
+            Color.WHITE -> blackPieces
+            else -> whitePieces
+        }
+        val kingMovements = teamPieces.find { it.isKing() }!!.mainMove()
+        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove() }
+        val isCheckMate = kingMovements.filter { kingMovement ->
+            enemiesMovements.any { it.`is`(kingMovement) }
+        }.size == kingMovements.size
+        return isCheckMate
     }
 
     fun result(): ChessResult {
