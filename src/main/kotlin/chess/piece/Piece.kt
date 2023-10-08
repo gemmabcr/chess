@@ -16,9 +16,11 @@ abstract class Piece(
 
     abstract fun mainMove(): List<Square>
     abstract fun journey(destination: Square): List<Square>
+    open fun isKing(): Boolean = false
 
     fun `is`(color: Color): Boolean = this.color == color
     fun `is`(square: Square): Boolean = this.square == square
+    fun getPosition(): Square = this.square
     fun isValid(destination: Square): Boolean = mainMove().contains(destination)
 
     fun randomMove(): Square {

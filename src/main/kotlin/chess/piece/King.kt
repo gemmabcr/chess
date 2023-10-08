@@ -16,4 +16,5 @@ class King(
         return possibleMoves
     }
     override fun journey(destination: Square): List<Square> = emptyList()
+    override fun isKing(): Boolean = true
 }

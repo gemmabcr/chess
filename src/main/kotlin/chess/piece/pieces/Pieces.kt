@@ -7,10 +7,16 @@ import chess.piece.movement.PieceDestination
 import chess.square.Square
 
 class Pieces {
-    private val pieces: MutableList<Piece> = InitialPieces.setUp()
+    private val blackPieces: MutableList<Piece> = InitialPieces.setUp(Color.BLACK)
+    private val whitePieces: MutableList<Piece> = InitialPieces.setUp(Color.WHITE)
 
-    fun color(color: Color): List<Piece> {
-        return pieces.filter { piece -> piece.`is`(color) }
+    private fun allPieces(): List<Piece> {
+        return blackPieces.plus(whitePieces)
+    }
+
+    fun color(color: Color): List<Piece> = when (color) {
+        Color.BLACK -> blackPieces
+        else -> whitePieces
     }
 
     fun isValid(movement: PieceDestination): Boolean {
@@ -22,10 +28,25 @@ class Pieces {
         return journey.find { square -> isPlenty(square) } == null
     }
 
-    private fun isPlenty(square: Square): Boolean = pieces.find { piece -> piece.`is`(square) } != null
+    private fun isPlenty(square: Square): Boolean = allPieces().find { piece -> piece.`is`(square) } != null
 
     fun hasResult(): Boolean {
-        TODO("Not yet implemented")
+        return isCheck(Color.BLACK) || isCheck(Color.WHITE)
+        // TODO: is check mate
+    }
+
+    private fun isCheck(kingColor: Color): Boolean {
+        val teamPieces = when (kingColor) {
+            Color.WHITE -> whitePieces
+            else -> blackPieces
+        }
+        val enemiesPieces = when (kingColor) {
+            Color.WHITE -> blackPieces
+            else -> whitePieces
+        }
+        val kingPosition = teamPieces.find { it.isKing() }!!.getPosition()
+        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove() }
+        return enemiesMovements.find { movement -> movement.`is`(kingPosition) } != null
     }
 
     fun result(): ChessResult {

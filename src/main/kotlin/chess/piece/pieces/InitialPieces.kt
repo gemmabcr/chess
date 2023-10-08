@@ -8,15 +8,23 @@ import chess.square.Square
 
 class InitialPieces {
     companion object {
-        fun setUp(): MutableList<Piece> {
-            return Column.all().flatMap { column: Column ->
-                listOf(
-                    mainPiece(Color.WHITE, column, Row.ONE),
-                    Pawn(Color.WHITE, Square(column, Row.TWO)),
-                    Pawn(Color.BLACK, Square(column, Row.SEVEN)),
-                    mainPiece(Color.BLACK, column, Row.EIGHT),
-                )
-            }.toMutableList()
+        fun setUp(color: Color): MutableList<Piece> {
+            when (color) {
+                Color.BLACK -> {
+                    return Column.all().flatMap { column: Column ->
+                        listOf(
+                            Pawn(Color.BLACK, Square(column, Row.SEVEN)),
+                            mainPiece(Color.BLACK, column, Row.EIGHT),
+                        )
+                    }.toMutableList()
+                }
+                else -> return Column.all().flatMap { column: Column ->
+                    listOf(
+                        mainPiece(Color.WHITE, column, Row.ONE),
+                        Pawn(Color.WHITE, Square(column, Row.TWO)),
+                    )
+                }.toMutableList()
+            }
         }
 
         private fun mainPiece(color: Color, column: Column, row: Row): Piece = when {
