@@ -8,7 +8,10 @@ class Square(
 ) {
     private val color: Color = setColor()
 
+    fun getColor(): Color = this.color
+
     fun `is`(square: Square): Boolean = this.column == square.column && this.row == square.row
+    fun isRowIndex(index: Int): Boolean = this.row.ordinal == index
 
     private fun setColor(): Color = when {
         columnIsPair() && rowIsPair() -> Color.BLACK

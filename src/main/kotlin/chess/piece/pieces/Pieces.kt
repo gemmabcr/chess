@@ -7,10 +7,10 @@ import chess.piece.movement.PieceDestination
 import chess.square.Square
 
 class Pieces {
-    private val blackPieces: MutableList<Piece> = InitialPieces.setUpBlack()
-    private val whitePieces: MutableList<Piece> = InitialPieces.setUpWhite()
+    private val blackPieces: MutableList<Piece> = PieceSetOut.setUpBlack()
+    private val whitePieces: MutableList<Piece> = PieceSetOut.setUpWhite()
 
-    private fun allPieces(): List<Piece> {
+    fun allPieces(): List<Piece> {
         return blackPieces.plus(whitePieces)
     }
 

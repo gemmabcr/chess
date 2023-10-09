@@ -6,7 +6,7 @@ import chess.square.Column
 import chess.square.Row
 import chess.square.Square
 
-class InitialPieces {
+class PieceSetOut {
     companion object {
         fun setUpWhite(): MutableList<Piece> = Column.all()
             .flatMap { column: Column ->
