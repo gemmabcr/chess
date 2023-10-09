@@ -14,5 +14,5 @@ enum class UiIcon(val icon: String) {
     BLACK_BISHOP("♝"),
     BLACK_KNIGHT("♞"),
     BLACK_PAWN("♟"),
-    BLACK_SQUARE("■"),
+    BLACK_SQUARE("▧"),
 }
