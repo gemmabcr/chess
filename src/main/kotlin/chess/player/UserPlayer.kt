@@ -13,7 +13,7 @@ class UserPlayer(
 ): Player(color, pieces) {
     override fun pieceMovement(): PieceDestination {
         val piece: Piece = ui.askPiece(pieces)
-        val square: Square = ui.askSquare()
+        val square: Square = ui.askSquare(piece.mainMove())
         return PieceDestination(piece, square)
     }
 }

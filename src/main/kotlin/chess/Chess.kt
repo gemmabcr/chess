@@ -43,6 +43,9 @@ class Chess {
         do {
             val movement = player.pieceMovement()
             val validMove = pieces.isValid(movement)
+            if (!validMove) {
+                ui.invalidMove()
+            }
         } while (!validMove)
     }
 }

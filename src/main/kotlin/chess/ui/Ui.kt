@@ -28,8 +28,13 @@ class Ui {
         else -> throw Error("Incorrect piece")
     }
 
-    fun askSquare(): Square {
-        TODO("Not yet implemented")
+    fun askSquare(mainMove: List<Square>): Square {
+        print("Write the number of the square you want to move:")
+        println()
+        mainMove.forEachIndexed { index, move -> println("${index}-> ${move.toString()} ") }
+        val square = mainMove[readln().toInt()]
+        println("You are moving to ${square.toString()}")
+        return square
     }
 
     fun print(result: ChessResult) {
@@ -88,5 +93,9 @@ class Ui {
                 print(""" ${Column.entries[column.ordinal]} """)
             }
         } }
+    }
+
+    fun invalidMove() {
+        println("** Invalid move **")
     }
 }

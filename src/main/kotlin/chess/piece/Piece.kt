@@ -25,7 +25,7 @@ abstract class Piece(
     fun getColor(): Color = this.color
     fun getPosition(): Square = this.square
 
-    fun isValid(destination: Square): Boolean = mainMove().contains(destination)
+    fun isValid(destination: Square): Boolean = mainMove().any { square -> square.`is`(destination) }
 
     fun randomMove(): Square {
         val moves = mainMove()
