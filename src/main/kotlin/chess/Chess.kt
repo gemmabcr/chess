@@ -43,6 +43,7 @@ class Chess {
         do {
             val movement = player.pieceMovement()
             val validMove = pieces.isValid(movement)
+            pieces.checkRemoveEnemy(movement)
             if (!validMove) {
                 ui.invalidMove()
             }

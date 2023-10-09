@@ -25,7 +25,15 @@ class Pieces {
             return false
         }
         val journey = movement.piece.journey(movement.destination)
-        return journey.find { square -> isPlenty(square) } == null
+        if (journey.find { square -> isPlenty(square) } != null) {
+            return false
+        }
+        val destinationHasPiece = this.allPieces().find { piece: Piece -> piece.`is`(movement.destination) }
+        if (destinationHasPiece != null) return when {
+            destinationHasPiece.`is`(movement.piece.getColor()) -> false
+            else -> true
+        }
+        return true
     }
 
     private fun isPlenty(square: Square): Boolean = allPieces().find { piece -> piece.`is`(square) } != null
@@ -67,5 +75,17 @@ class Pieces {
             return ChessResult.CHECK
         }
         return ChessResult.CHECKMATE
+    }
+
+    fun checkRemoveEnemy(movement: PieceDestination) {
+        val destinationHasPiece = this.allPieces().find { piece: Piece -> piece.`is`(movement.destination) }
+        if (destinationHasPiece != null) if (!(destinationHasPiece.`is`(movement.piece.getColor()))) {
+            this.remove(destinationHasPiece)
+        }
+    }
+
+    private fun remove(piece: Piece) = when (piece.getColor()) {
+        Color.WHITE -> whitePieces.remove(piece)
+        else -> blackPieces.remove(piece)
     }
 }
