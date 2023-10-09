@@ -29,6 +29,7 @@ class Chess {
         do {
             ui.print(board, pieces.allPieces())
             val player = turn.activePlayer()
+            ui.print(player)
             validMove(player)
             if (pieces.isCheck()) {
                 ui.print(pieces.result())

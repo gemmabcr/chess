@@ -8,7 +8,7 @@ import kotlin.random.Random
 class ComputerPlayer(
     private val color: Color,
     private val pieces: List<Piece>
-): Player(color) {
+): Player(color, pieces) {
 
     override fun pieceMovement(): PieceDestination {
         val index = Random.nextInt(0, pieces.size)

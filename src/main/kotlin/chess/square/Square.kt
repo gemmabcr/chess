@@ -40,4 +40,8 @@ class Square(
     fun maxRightMovement(): Int = column.maxRightMovement()
     fun maxDownMovement(): Int = row.maxDownMovement()
     fun maxLeftMovement(): Int = column.maxLeftMovement()
+
+    override fun toString(): String {
+        return "${this.column}-${this.row.ordinal + 1}"
+    }
 }

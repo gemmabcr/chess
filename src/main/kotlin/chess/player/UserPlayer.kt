@@ -8,10 +8,11 @@ import chess.square.Square
 
 class UserPlayer(
     private val color: Color,
+    private val pieces: List<Piece>,
     private val ui: Ui
-): Player(color) {
+): Player(color, pieces) {
     override fun pieceMovement(): PieceDestination {
-        val piece: Piece = ui.askPiece()
+        val piece: Piece = ui.askPiece(pieces)
         val square: Square = ui.askSquare()
         return PieceDestination(piece, square)
     }

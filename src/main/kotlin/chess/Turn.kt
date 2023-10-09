@@ -8,7 +8,10 @@ import chess.ui.Ui
 
 class Turn(ui: Ui, pieces: Pieces) {
 
-    private val players: List<Player> = listOf(UserPlayer(Color.WHITE, ui), ComputerPlayer(Color.BLACK, pieces.color(Color.BLACK)))
+    private val players: List<Player> = listOf(
+        UserPlayer(Color.WHITE, pieces.color(Color.WHITE), ui),
+        ComputerPlayer(Color.BLACK, pieces.color(Color.BLACK))
+    )
     private var activePlayer = players[0]
     private var currentTurn: Int = 1
 
