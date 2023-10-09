@@ -35,7 +35,7 @@ class Chess {
                 ui.print(pieces.result())
             }
             turn.next()
-        } while(pieces.hasResult())
+        } while(!pieces.hasResult())
         ui.print(pieces.result())
     }
 
@@ -43,6 +43,7 @@ class Chess {
         do {
             val movement = player.pieceMovement()
             val validMove = pieces.isValid(movement)
+            pieces.move(movement)
             pieces.checkRemoveEnemy(movement)
             if (!validMove) {
                 ui.invalidMove()

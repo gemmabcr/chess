@@ -13,6 +13,6 @@ class ComputerPlayer(
     override fun pieceMovement(): PieceDestination {
         val index = Random.nextInt(0, pieces.size)
         val piece = pieces[index]
-        return PieceDestination(piece, piece.randomMove())
+        return PieceDestination(piece, piece.getPosition(), piece.randomMove())
     }
 }

@@ -38,7 +38,7 @@ class Pieces {
 
     private fun isPlenty(square: Square): Boolean = allPieces().find { piece -> piece.`is`(square) } != null
 
-    fun hasResult(): Boolean = isCheck() || isCheckMate(Color.BLACK) || isCheckMate(Color.WHITE)
+    fun hasResult(): Boolean = isCheckMate(Color.BLACK) || isCheckMate(Color.WHITE)
 
     fun isCheck(): Boolean = isCheckBy(Color.BLACK) || isCheckBy(Color.WHITE)
 
@@ -87,5 +87,9 @@ class Pieces {
     private fun remove(piece: Piece) = when (piece.getColor()) {
         Color.WHITE -> whitePieces.remove(piece)
         else -> blackPieces.remove(piece)
+    }
+
+    fun move(movement: PieceDestination) {
+        allPieces().find { piece -> piece.`is`(movement.origin) }!!.move(movement.destination)
     }
 }

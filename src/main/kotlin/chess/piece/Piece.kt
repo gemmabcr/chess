@@ -9,13 +9,17 @@ import kotlin.random.Random
 
 abstract class Piece(
     private val color: Color,
-    private val square: Square
+    private var square: Square
 ) {
     private val diagonalMovement: DiagonalMovement = DiagonalMovement(square)
     private val rankFileMovement: RankFileMovement = RankFileMovement(square)
 
     abstract fun mainMove(): List<Square>
     abstract fun journey(destination: Square): List<Square>
+
+    fun move(destination: Square) {
+        this.square = destination
+    }
 
     open fun isKing(): Boolean = false
 

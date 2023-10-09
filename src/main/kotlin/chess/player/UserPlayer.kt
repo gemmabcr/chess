@@ -14,6 +14,6 @@ class UserPlayer(
     override fun pieceMovement(): PieceDestination {
         val piece: Piece = ui.askPiece(pieces)
         val square: Square = ui.askSquare(piece.mainMove())
-        return PieceDestination(piece, square)
+        return PieceDestination(piece, piece.getPosition(), square)
     }
 }
