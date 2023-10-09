@@ -36,7 +36,7 @@ class Knight(
         if (maxLeftMove >= 2 && maxDownMove >= 1) {
             movesList.add(square.move(-2, -1))
         }
-        if (maxLeftMove >= 2 && maxRightMove >= 1) {
+        if (maxDownMove >= 2 && maxLeftMove >= 1) {
             movesList.add(square.move(-1, -2))
         }
 
