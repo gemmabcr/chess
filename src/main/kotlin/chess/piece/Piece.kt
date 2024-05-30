@@ -40,7 +40,7 @@ abstract class Piece(
         return moves.random()
     }
 
-    fun possibleDiagonalMoves(maxMove: Int = 8): MainMovement = diagonalMovement.possibleMoves(maxMove)
+    fun possibleDiagonalMoves(maxMove: Int? = null): MainMovement = diagonalMovement.possibleMoves(maxMove)
 
     fun possibleRankFileMoves(maxMove: Int = 8): MainMovement = rankFileMovement.possibleMoves(maxMove)
 }

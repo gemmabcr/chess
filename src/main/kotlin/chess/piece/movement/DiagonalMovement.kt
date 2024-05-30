@@ -46,11 +46,7 @@ class DiagonalMovement(
     private fun diagonalSquares(vertical: Vertical, horizontal: Horizontal, maxMove: Int): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
         if (canMoveDiagonally(vertical, horizontal)) {
-            val maxDiagonalMovement = when {
-                maxMove != 8 -> maxMove
-                else -> maxDiagonalMove(vertical, horizontal)
-            }
-            for (i in 1..maxDiagonalMovement) {
+            for (i in 1 ..maxMove) {
                 possibleMoves.add(
                     square.move(
                         getColumnIndex(horizontal, i),
@@ -67,21 +63,6 @@ class DiagonalMovement(
         dirVertical `is` Vertical.BACKWARD && dirHorizontal `is` Horizontal.RIGHT -> canMoveBackwardRight
         dirVertical `is` Vertical.BACKWARD && dirHorizontal `is` Horizontal.LEFT -> canMoveBackwardLeft
         else -> canMoveForwardLeft
-    }
-
-    private fun maxDiagonalMove(dirVertical: Vertical, dirHorizontal: Horizontal): Int = when {
-        getVertical(dirVertical) < getHorizontal(dirHorizontal) -> getVertical(dirVertical)
-        else -> getHorizontal(dirHorizontal)
-    }
-
-    private fun getVertical(direction: Vertical) = when {
-        direction `is` Vertical.FORWARD -> square.maxForwardMovement()
-        else -> square.maxBackwardMovement()
-    }
-
-    private fun getHorizontal(direction: Horizontal) = when {
-        direction `is` Horizontal.RIGHT -> square.maxRightMovement()
-        else -> square.maxLeftMovement()
     }
 
     private fun getColumnIndex(direction: Horizontal, index: Int) = when {
