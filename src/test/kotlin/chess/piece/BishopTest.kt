@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 internal class BishopTest {
 
     @Test
-    fun givenBishopInFirstSquareWhenMainMoveThenReturnAllSquaresRightDiagonal() {
+    fun givenBishopInCornerSquareWhenMainMoveThenReturnAllSquaresRightDiagonal() {
         val bishop = Bishop(Color.BLACK, Square(Column.A, Row.ONE))
         val list: List<Square> = listOf(
             Square(Column.B, Row.TWO),

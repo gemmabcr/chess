@@ -40,7 +40,7 @@ class Knight(
             movesList.add(square.move(-1, -2))
         }
 
-        return movesList.toList()
+        return movesList.sortedBy { it.getColumn() }.toList()
     }
     override fun journey(destination: Square): List<Square> = emptyList()
 }

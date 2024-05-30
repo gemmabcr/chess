@@ -13,7 +13,7 @@ class King(
         possibleDiagonalMoves(1).forEach { square -> possibleMoves.add(square) }
         possibleRankFileMoves(1).forEach { square -> possibleMoves.add(square) }
 
-        return possibleMoves
+        return possibleMoves.sortedBy { it.getColumn() }
     }
     override fun journey(destination: Square): List<Square> = emptyList()
     override fun isKing(): Boolean = true

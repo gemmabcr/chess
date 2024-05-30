@@ -20,7 +20,7 @@ class RankFileMovement(
         fileSquares(Horizontal.RIGHT, maxMove).forEach { square -> movesList.add(square) }
         fileSquares(Horizontal.LEFT, maxMove).forEach { square -> movesList.add(square) }
 
-        return movesList.toList()
+        return movesList.sortedBy { it.getColumn() }.toList()
     }
 
     private fun rankSquares(vertical: Vertical, maxMove: Int): List<Square> {

@@ -13,7 +13,7 @@ class Queen(
         possibleDiagonalMoves().forEach { square -> possibleMoves.add(square) }
         possibleRankFileMoves().forEach { square -> possibleMoves.add(square) }
 
-        return possibleMoves.toList()
+        return possibleMoves.sortedBy { it.getColumn() }.toList()
     }
     override fun journey(destination: Square): List<Square> {
         TODO("Not yet implemented")
