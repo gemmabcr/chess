@@ -86,4 +86,9 @@ data class Square(
         if (firstValue > lastValue) {
             lastValue
         } else firstValue
+
+    fun canMoveForwardRight(): Boolean = canMoveForward() && canMoveRight()
+    fun canMoveBackwardRight(): Boolean = canMoveBackward() && canMoveRight()
+    fun canMoveBackwardLeft(): Boolean = canMoveBackward() && canMoveLeft()
+    fun canMoveForwardLeft(): Boolean = canMoveForward() && canMoveLeft()
 }

@@ -6,11 +6,6 @@ import chess.square.direction.Diagonal
 class DiagonalMovement(
     private val square: Square,
 ) {
-    private val canMoveForwardRight = square.canMoveForward() && square.canMoveRight()
-    private val canMoveBackwardRight = square.canMoveBackward() && square.canMoveRight()
-    private val canMoveBackwardLeft = square.canMoveBackward() && square.canMoveLeft()
-    private val canMoveForwardLeft = square.canMoveForward() && square.canMoveLeft()
-
     fun possibleMoves(maxMove: Int? = null): MainMovement {
         val mainMovement = MainMovement()
 
@@ -51,9 +46,9 @@ class DiagonalMovement(
     }
 
     private fun canMoveDiagonally(diagonal: Diagonal): Boolean = when {
-        diagonal `is` Diagonal.FORWARD_RIGHT -> canMoveForwardRight
-        diagonal `is` Diagonal.BACKWARD_RIGHT -> canMoveBackwardRight
-        diagonal `is` Diagonal.BACKWARD_LEFT -> canMoveBackwardLeft
-        else -> canMoveForwardLeft
+        diagonal `is` Diagonal.FORWARD_RIGHT -> square.canMoveForwardRight()
+        diagonal `is` Diagonal.BACKWARD_RIGHT -> square.canMoveBackwardRight()
+        diagonal `is` Diagonal.BACKWARD_LEFT -> square.canMoveBackwardLeft()
+        else -> square.canMoveForwardLeft()
     }
 }
