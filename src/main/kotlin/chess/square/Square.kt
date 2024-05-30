@@ -16,6 +16,7 @@ data class Square(
     fun getColor(): Color = this.color
 
     fun `is`(square: Square): Boolean = this.column == square.column && this.row == square.row
+
     fun isRowIndex(index: Int): Boolean = this.row.ordinal == index
 
     private fun setColor(): Color = when {
@@ -24,13 +25,9 @@ data class Square(
         else -> Color.WHITE
     }
 
-    private fun columnIsPair(): Boolean {
-        return column.ordinal % 2 != 0
-    }
+    private fun columnIsPair(): Boolean = column.ordinal % 2 != 0
 
-    private fun rowIsPair(): Boolean {
-        return row.ordinal % 2 != 0
-    }
+    private fun rowIsPair(): Boolean = row.ordinal % 2 != 0
 
     fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
 
@@ -58,34 +55,15 @@ data class Square(
         return "${this.column}-${this.row.ordinal + 1}"
     }
 
-    fun maxForwardRightMovement(): Int {
-        val maxForwardMovement = maxForwardMovement()
-        val maxRightMovement = maxRightMovement()
-        return lowerValue(maxForwardMovement, maxRightMovement)
-    }
+    fun maxForwardLeftMovement(): Int = lowerValue(maxForwardMovement(), maxLeftMovement())
+    fun maxForwardRightMovement(): Int = lowerValue(maxForwardMovement(), maxRightMovement())
+    fun maxBackwardLeftMovement(): Int = lowerValue(maxBackwardMovement(), maxLeftMovement())
+    fun maxBackwardRightMovement(): Int = lowerValue(maxBackwardMovement(), maxRightMovement())
 
-    fun maxForwardLeftMovement(): Int {
-        val maxForwardMovement = maxForwardMovement()
-        val maxLeftMovement = maxLeftMovement()
-        return lowerValue(maxForwardMovement, maxLeftMovement)
+    private fun lowerValue(firstValue: Int, lastValue: Int) = when {
+        firstValue > lastValue -> lastValue
+        else -> firstValue
     }
-
-    fun maxBackwardRightMovement(): Int {
-        val maxBackwardMovement = maxBackwardMovement()
-        val maxRightMovement = maxRightMovement()
-        return lowerValue(maxBackwardMovement, maxRightMovement)
-    }
-
-    fun maxBackwardLeftMovement(): Int {
-        val maxBackwardMovement = maxBackwardMovement()
-        val maxLeftMovement = maxLeftMovement()
-        return lowerValue(maxBackwardMovement, maxLeftMovement)
-    }
-
-    private fun lowerValue(firstValue: Int, lastValue: Int) =
-        if (firstValue > lastValue) {
-            lastValue
-        } else firstValue
 
     fun canMoveForwardRight(): Boolean = canMoveForward() && canMoveRight()
     fun canMoveBackwardRight(): Boolean = canMoveBackward() && canMoveRight()

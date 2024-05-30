@@ -16,11 +16,7 @@ class DiagonalMovement(
         diagonalSquares(
             Diagonal.FORWARD_LEFT,
             maxMove ?: square.maxForwardLeftMovement()
-        ).forEach { square ->
-            mainMovement.addUpLeft(
-                square
-            )
-        }
+        ).forEach { square -> mainMovement.addUpLeft(square) }
         diagonalSquares(
             Diagonal.BACKWARD_RIGHT,
             maxMove ?: square.maxBackwardRightMovement()
@@ -37,9 +33,7 @@ class DiagonalMovement(
         val possibleMoves: MutableList<Square> = mutableListOf()
         if (canMoveDiagonally(diagonal)) {
             for (i in 1 ..maxMove) {
-                possibleMoves.add(
-                    square.move(diagonal, i)
-                )
+                possibleMoves.add(square.move(diagonal, i))
             }
         }
         return possibleMoves
