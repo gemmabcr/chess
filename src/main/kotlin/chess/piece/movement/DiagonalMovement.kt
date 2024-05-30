@@ -7,29 +7,37 @@ import chess.square.direction.Vertical
 class DiagonalMovement(
     private val square: Square,
 ) {
-    private val canMoveUpRight = square.canMoveUp() && square.canMoveRight()
-    private val canMoveDownRight = square.canMoveDown() && square.canMoveRight()
-    private val canMoveDownLeft = square.canMoveDown() && square.canMoveLeft()
-    private val canMoveUpLeft = square.canMoveUp() && square.canMoveLeft()
+    private val canMoveForwardRight = square.canMoveForward() && square.canMoveRight()
+    private val canMoveBackwardRight = square.canMoveBackward() && square.canMoveRight()
+    private val canMoveBackwardLeft = square.canMoveBackward() && square.canMoveLeft()
+    private val canMoveForwardLeft = square.canMoveForward() && square.canMoveLeft()
 
-    fun possibleMoves(maxMove: Int): MainMovement {
+    fun possibleMoves(maxMove: Int? = null): MainMovement {
         val mainMovement = MainMovement()
 
         diagonalSquares(
             Vertical.FORWARD,
             Horizontal.RIGHT,
-            maxMove
+            maxMove ?: square.maxForwardRightMovement()
         ).forEach { square -> mainMovement.addUpRight(square) }
-        diagonalSquares(Vertical.FORWARD, Horizontal.LEFT, maxMove).forEach { square -> mainMovement.addUpLeft(square) }
+        diagonalSquares(
+            Vertical.FORWARD,
+            Horizontal.LEFT,
+            maxMove ?: square.maxForwardLeftMovement()
+        ).forEach { square ->
+            mainMovement.addUpLeft(
+                square
+            )
+        }
         diagonalSquares(
             Vertical.BACKWARD,
             Horizontal.RIGHT,
-            maxMove
+            maxMove ?: square.maxBackwardRightMovement()
         ).forEach { square -> mainMovement.addDownRight(square) }
         diagonalSquares(
             Vertical.BACKWARD,
             Horizontal.LEFT,
-            maxMove
+            maxMove ?: square.maxBackwardLeftMovement()
         ).forEach { square -> mainMovement.addDownLeft(square) }
 
         return mainMovement
@@ -55,10 +63,10 @@ class DiagonalMovement(
     }
 
     private fun canMoveDiagonally(dirVertical: Vertical, dirHorizontal: Horizontal): Boolean = when {
-        dirVertical `is` Vertical.FORWARD && dirHorizontal `is` Horizontal.RIGHT -> canMoveUpRight
-        dirVertical `is` Vertical.BACKWARD && dirHorizontal `is` Horizontal.RIGHT -> canMoveDownRight
-        dirVertical `is` Vertical.BACKWARD && dirHorizontal `is` Horizontal.LEFT -> canMoveDownLeft
-        else -> canMoveUpLeft
+        dirVertical `is` Vertical.FORWARD && dirHorizontal `is` Horizontal.RIGHT -> canMoveForwardRight
+        dirVertical `is` Vertical.BACKWARD && dirHorizontal `is` Horizontal.RIGHT -> canMoveBackwardRight
+        dirVertical `is` Vertical.BACKWARD && dirHorizontal `is` Horizontal.LEFT -> canMoveBackwardLeft
+        else -> canMoveForwardLeft
     }
 
     private fun maxDiagonalMove(dirVertical: Vertical, dirHorizontal: Horizontal): Int = when {
@@ -67,8 +75,8 @@ class DiagonalMovement(
     }
 
     private fun getVertical(direction: Vertical) = when {
-        direction `is` Vertical.FORWARD -> square.maxUpMovement()
-        else -> square.maxDownMovement()
+        direction `is` Vertical.FORWARD -> square.maxForwardMovement()
+        else -> square.maxBackwardMovement()
     }
 
     private fun getHorizontal(direction: Horizontal) = when {

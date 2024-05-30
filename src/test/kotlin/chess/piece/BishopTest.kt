@@ -14,7 +14,7 @@ internal class BishopTest {
     fun givenBishopInCornerSquareWhenMainMoveThenReturnAllSquaresRightDiagonal() {
         val bishop = Bishop(Color.BLACK, Square(Column.A, Row.ONE))
         val mainMovement = MainMovement(
-            upRightDiagonal = mutableListOf(
+            forwardRight = mutableListOf(
                 Square(Column.B, Row.TWO),
                 Square(Column.C, Row.THREE),
                 Square(Column.D, Row.FOUR),
@@ -32,23 +32,23 @@ internal class BishopTest {
     fun givenBishopInCenterBoardWhenMainMoveThenReturnAllSquaresInAllSidesDiagonal() {
         val bishop = Bishop(Color.BLACK, Square(Column.D, Row.FOUR))
         val mainMovement = MainMovement(
-            upRightDiagonal = mutableListOf(
+            forwardRight = mutableListOf(
                 Square(Column.E, Row.FIVE),
                 Square(Column.F, Row.SIX),
                 Square(Column.G, Row.SEVEN),
                 Square(Column.H, Row.EIGHT),
             ),
-            upLeftDiagonal = mutableListOf(
+            forwardLeft = mutableListOf(
                 Square(Column.A, Row.SEVEN),
                 Square(Column.B, Row.SIX),
                 Square(Column.C, Row.FIVE),
             ),
-            downRightDiagonal = mutableListOf(
+            backwardRight = mutableListOf(
                 Square(Column.E, Row.THREE),
                 Square(Column.F, Row.TWO),
                 Square(Column.G, Row.ONE),
             ),
-            downLeftDiagonal = mutableListOf(
+            backwardLeft = mutableListOf(
                 Square(Column.A, Row.ONE),
                 Square(Column.B, Row.TWO),
                 Square(Column.C, Row.THREE),

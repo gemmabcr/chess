@@ -7,9 +7,9 @@ import chess.square.direction.Vertical
 class RankFileMovement(
     private val square: Square,
 ){
-    private val canMoveUp = square.canMoveUp()
+    private val canMoveUp = square.canMoveForward()
     private val canMoveRight = square.canMoveRight()
-    private val canMoveDown = square.canMoveDown()
+    private val canMoveDown = square.canMoveBackward()
     private val canMoveLeft = square.canMoveLeft()
 
     fun possibleMoves(maxMove: Int): MainMovement {
@@ -72,8 +72,8 @@ class RankFileMovement(
     }
 
     private fun maxRankMove(direction: Vertical): Int = when {
-        direction `is` Vertical.FORWARD -> square.maxUpMovement()
-        else -> square.maxDownMovement()
+        direction `is` Vertical.FORWARD -> square.maxForwardMovement()
+        else -> square.maxBackwardMovement()
     }
 
     private fun maxFileMove(direction: Horizontal): Int = when {

@@ -7,32 +7,32 @@ data class MainMovement(
     private val backward: MutableList<Square> = mutableListOf(),
     private val left: MutableList<Square> = mutableListOf(),
     private val right: MutableList<Square> = mutableListOf(),
-    private val upLeftDiagonal: MutableList<Square> = mutableListOf(),
-    private val downLeftDiagonal: MutableList<Square> = mutableListOf(),
-    private val upRightDiagonal: MutableList<Square> = mutableListOf(),
-    private val downRightDiagonal: MutableList<Square> = mutableListOf(),
+    private val forwardLeft: MutableList<Square> = mutableListOf(),
+    private val backwardLeft: MutableList<Square> = mutableListOf(),
+    private val forwardRight: MutableList<Square> = mutableListOf(),
+    private val backwardRight: MutableList<Square> = mutableListOf(),
 ) {
     fun allSquares(): List<Square> =
-        forward + backward + left + right + upLeftDiagonal + downLeftDiagonal + upRightDiagonal + downRightDiagonal
+        forward + backward + left + right + forwardLeft + backwardLeft + forwardRight + backwardRight
 
     fun addUpRight(square: Square) {
-        upRightDiagonal.add(square)
-        upRightDiagonal.sortBy { it.getColumn() }
+        forwardRight.add(square)
+        forwardRight.sortBy { it.getColumn() }
     }
 
     fun addUpLeft(square: Square) {
-        upLeftDiagonal.add(square)
-        upLeftDiagonal.sortBy { it.getColumn() }
+        forwardLeft.add(square)
+        forwardLeft.sortBy { it.getColumn() }
     }
 
     fun addDownRight(square: Square) {
-        downRightDiagonal.add(square)
-        downRightDiagonal.sortBy { it.getColumn() }
+        backwardRight.add(square)
+        backwardRight.sortBy { it.getColumn() }
     }
 
     fun addDownLeft(square: Square) {
-        downLeftDiagonal.add(square)
-        downLeftDiagonal.sortBy { it.getColumn() }
+        backwardLeft.add(square)
+        backwardLeft.sortBy { it.getColumn() }
     }
 
     fun addForward(square: Square) {
@@ -66,10 +66,10 @@ data class MainMovement(
         val backwardCopy = backward + moves.backward
         val leftCopy = left + moves.left
         val rightCopy = right + moves.right
-        val upLeftDiagonalCopy = upLeftDiagonal + moves.upLeftDiagonal
-        val downLeftDiagonalCopy = downLeftDiagonal + moves.downLeftDiagonal
-        val upRightDiagonalCopy = upRightDiagonal + moves.upRightDiagonal
-        val downRightDiagonalCopy = downRightDiagonal + moves.downRightDiagonal
+        val upLeftDiagonalCopy = forwardLeft + moves.forwardLeft
+        val downLeftDiagonalCopy = backwardLeft + moves.backwardLeft
+        val upRightDiagonalCopy = forwardRight + moves.forwardRight
+        val downRightDiagonalCopy = backwardRight + moves.backwardRight
 
 
         return MainMovement(
@@ -77,10 +77,10 @@ data class MainMovement(
             backward = backwardCopy.sortedBy { it.getRow() }.toMutableList(),
             left = leftCopy.sortedBy { it.getColumn() }.toMutableList(),
             right = rightCopy.sortedBy { it.getColumn() }.toMutableList(),
-            upLeftDiagonal = upLeftDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
-            downLeftDiagonal = downLeftDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
-            upRightDiagonal = upRightDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
-            downRightDiagonal = downRightDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
+            forwardLeft = upLeftDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
+            backwardLeft = downLeftDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
+            forwardRight = upRightDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
+            backwardRight = downRightDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
         )
     }
 }

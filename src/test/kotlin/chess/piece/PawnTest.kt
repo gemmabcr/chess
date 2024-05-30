@@ -15,7 +15,7 @@ internal class PawnTest {
         val pawn = Pawn(Color.BLACK, Square(Column.A, Row.ONE))
         val mainMovement = MainMovement(
             forward = mutableListOf(Square(Column.A, Row.TWO)),
-            upRightDiagonal = mutableListOf(Square(Column.B, Row.TWO))
+            forwardRight = mutableListOf(Square(Column.B, Row.TWO))
         )
         val result: MainMovement = pawn.mainMove()
         assertEquals(mainMovement, result)
@@ -26,8 +26,8 @@ internal class PawnTest {
         val pawn = Pawn(Color.BLACK, Square(Column.D, Row.FOUR))
         val mainMovement = MainMovement(
             forward = mutableListOf(Square(Column.D, Row.FIVE)),
-            upLeftDiagonal = mutableListOf(Square(Column.C, Row.FIVE)),
-            upRightDiagonal = mutableListOf(Square(Column.E, Row.FIVE))
+            forwardLeft = mutableListOf(Square(Column.C, Row.FIVE)),
+            forwardRight = mutableListOf(Square(Column.E, Row.FIVE))
         )
         val result: MainMovement = pawn.mainMove()
         assertEquals(mainMovement, result)

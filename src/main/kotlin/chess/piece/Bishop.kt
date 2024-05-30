@@ -5,7 +5,7 @@ import chess.piece.movement.MainMovement
 import chess.square.Square
 
 class Bishop(
-    val color: Color,
+    color: Color,
     val square: Square
 ): Piece(color, square) {
 

@@ -5,7 +5,7 @@ import chess.piece.movement.MainMovement
 import chess.square.Square
 
 class Rook(
-    val color: Color,
+    color: Color,
     private val square: Square
 ): Piece(color, square) {
     override fun mainMove(): MainMovement = possibleRankFileMoves()

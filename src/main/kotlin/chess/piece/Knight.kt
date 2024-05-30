@@ -5,15 +5,15 @@ import chess.piece.movement.MainMovement
 import chess.square.Square
 
 class Knight(
-    val color: Color,
+    color: Color,
     private val square: Square
 ) : Piece(color, square) {
     override fun mainMove(): MainMovement {
         val mainMovement = MainMovement()
 
-        val maxUpMove = square.maxUpMovement()
+        val maxUpMove = square.maxForwardMovement()
         val maxRightMove = square.maxRightMovement()
-        val maxDownMove = square.maxDownMovement()
+        val maxDownMove = square.maxBackwardMovement()
         val maxLeftMove = square.maxLeftMovement()
 
         if (maxUpMove >= 2) {

@@ -14,7 +14,7 @@ internal class KnightTest {
     fun givenKnightInCornerSquareWhenMainMoveThenReturnTwoPossiblesMoves() {
         val knight = Knight(Color.BLACK, Square(Column.A, Row.ONE))
         val mainMovement = MainMovement(
-            upRightDiagonal = mutableListOf(Square(Column.B, Row.THREE), Square(Column.C, Row.TWO)),
+            forwardRight = mutableListOf(Square(Column.B, Row.THREE), Square(Column.C, Row.TWO)),
         )
         val result: MainMovement = knight.mainMove()
         assertEquals(mainMovement, result)
@@ -24,10 +24,10 @@ internal class KnightTest {
     fun givenKnightInCenterBoardWhenMainMoveThenReturnAllPossiblesMovementsAround() {
         val knight = Knight(Color.BLACK, Square(Column.D, Row.FOUR))
         val mainMovement = MainMovement(
-            upRightDiagonal = mutableListOf(Square(Column.E, Row.SIX), Square(Column.F, Row.FIVE)),
-            upLeftDiagonal = mutableListOf(Square(Column.B, Row.FIVE), Square(Column.C, Row.SIX)),
-            downLeftDiagonal = mutableListOf(Square(Column.B, Row.THREE), Square(Column.C, Row.TWO)),
-            downRightDiagonal = mutableListOf(Square(Column.E, Row.TWO), Square(Column.F, Row.THREE)),
+            forwardRight = mutableListOf(Square(Column.E, Row.SIX), Square(Column.F, Row.FIVE)),
+            forwardLeft = mutableListOf(Square(Column.B, Row.FIVE), Square(Column.C, Row.SIX)),
+            backwardLeft = mutableListOf(Square(Column.B, Row.THREE), Square(Column.C, Row.TWO)),
+            backwardRight = mutableListOf(Square(Column.E, Row.TWO), Square(Column.F, Row.THREE)),
         )
         val result: MainMovement = knight.mainMove()
         assertEquals(mainMovement, result)

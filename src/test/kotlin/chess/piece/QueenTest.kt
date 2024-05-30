@@ -23,7 +23,7 @@ internal class QueenTest {
                 Square(Column.A, Row.SEVEN),
                 Square(Column.A, Row.EIGHT),
             ),
-            upRightDiagonal = mutableListOf(
+            forwardRight = mutableListOf(
                 Square(Column.B, Row.TWO),
                 Square(Column.C, Row.THREE),
                 Square(Column.D, Row.FOUR),
@@ -72,23 +72,23 @@ internal class QueenTest {
                 Square(Column.B, Row.FOUR),
                 Square(Column.C, Row.FOUR),
             ),
-            upRightDiagonal = mutableListOf(
+            forwardRight = mutableListOf(
                 Square(Column.E, Row.FIVE),
                 Square(Column.F, Row.SIX),
                 Square(Column.G, Row.SEVEN),
                 Square(Column.H, Row.EIGHT),
             ),
-            upLeftDiagonal = mutableListOf(
+            forwardLeft = mutableListOf(
                 Square(Column.A, Row.SEVEN),
                 Square(Column.B, Row.SIX),
                 Square(Column.C, Row.FIVE),
             ),
-            downLeftDiagonal = mutableListOf(
+            backwardLeft = mutableListOf(
                 Square(Column.A, Row.ONE),
                 Square(Column.B, Row.TWO),
                 Square(Column.C, Row.THREE),
             ),
-            downRightDiagonal = mutableListOf(
+            backwardRight = mutableListOf(
                 Square(Column.E, Row.THREE),
                 Square(Column.F, Row.TWO),
                 Square(Column.G, Row.ONE),

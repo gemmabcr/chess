@@ -7,7 +7,7 @@ import chess.piece.movement.PieceDestination
 import chess.square.Square
 
 class UserPlayer(
-    val color: Color,
+    color: Color,
     private val pieces: List<Piece>,
     private val ui: Ui
 ): Player(color, pieces) {
