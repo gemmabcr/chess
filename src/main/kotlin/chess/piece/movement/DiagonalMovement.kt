@@ -20,7 +20,7 @@ class DiagonalMovement(
         diagonalSquares(Vertical.DOWN, Horizontal.RIGHT, maxMove).forEach { square -> movesList.add(square) }
         diagonalSquares(Vertical.DOWN, Horizontal.LEFT, maxMove).forEach { square -> movesList.add(square) }
 
-        return movesList.toList()
+        return movesList.sortedBy { it.getColumn() }.toList()
     }
 
     private fun diagonalSquares(vertical: Vertical, horizontal: Horizontal, maxMove: Int): List<Square> {

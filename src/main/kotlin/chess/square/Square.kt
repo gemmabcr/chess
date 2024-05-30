@@ -2,12 +2,13 @@ package chess.square
 
 import chess.Color
 
-class Square(
+data class Square(
     private val column: Column,
     private val row: Row
 ) {
     private val color: Color = setColor()
 
+    fun getColumn(): Column = this.column
     fun getColor(): Color = this.color
 
     fun `is`(square: Square): Boolean = this.column == square.column && this.row == square.row

@@ -2,8 +2,8 @@ plugins {
     kotlin("jvm") version "1.9.23"
 }
 
-group = "org.connect4"
-version = "1.0-SNAPSHOT"
+group = "chess"
+version = "1.0"
 
 repositories {
     mavenCentral()
