@@ -9,6 +9,9 @@ data class Square(
     private val color: Color = setColor()
 
     fun getColumn(): Column = this.column
+
+    fun getRow(): Row = this.row
+
     fun getColor(): Color = this.color
 
     fun `is`(square: Square): Boolean = this.column == square.column && this.row == square.row

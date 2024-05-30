@@ -1,13 +1,16 @@
 package chess.piece
 
 import chess.Color
+import chess.piece.movement.MainMovement
 import chess.square.Square
 
 class Bishop(
-    private val color: Color,
-    private val square: Square
+    val color: Color,
+    val square: Square
 ): Piece(color, square) {
-    override fun mainMove(): List<Square> = possibleDiagonalMoves()
+
+    override fun mainMove(): MainMovement = possibleDiagonalMoves()
+
     override fun journey(destination: Square): List<Square> {
         val moves = square.differenceColRow(destination)
 

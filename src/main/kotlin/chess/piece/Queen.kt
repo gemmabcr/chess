@@ -1,20 +1,20 @@
 package chess.piece
 
 import chess.Color
+import chess.piece.movement.MainMovement
 import chess.square.Square
 
 class Queen(
-    private val color: Color,
-    private val square: Square
-): Piece(color, square) {
-    override fun mainMove(): List<Square> {
-        val possibleMoves: MutableList<Square> = mutableListOf()
+    val color: Color,
+    val square: Square
+) : Piece(color, square) {
 
-        possibleDiagonalMoves().forEach { square -> possibleMoves.add(square) }
-        possibleRankFileMoves().forEach { square -> possibleMoves.add(square) }
-
-        return possibleMoves.sortedBy { it.getColumn() }.toList()
+    override fun mainMove(): MainMovement {
+        var mainMovement = possibleDiagonalMoves()
+        mainMovement = mainMovement.copy(possibleRankFileMoves())
+        return mainMovement
     }
+
     override fun journey(destination: Square): List<Square> {
         TODO("Not yet implemented")
     }

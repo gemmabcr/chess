@@ -1,24 +1,25 @@
 package chess.piece
 
 import chess.Color
+import chess.piece.movement.MainMovement
 import chess.square.Square
 
 class Pawn(
-    private val color: Color,
+    val color: Color,
     private val square: Square
 ) : Piece(color, square) {
-    override fun mainMove(): List<Square> {
-        val list = mutableListOf<Square>()
+    override fun mainMove(): MainMovement {
+        val mainMovement = MainMovement()
         if (square.canMoveUp()) {
-            list.add(square.move(0, 1))
+            mainMovement.addForward(square.move(0, 1))
             if (square.canMoveLeft()) {
-                list.add(square.move(-1, 1))
+                mainMovement.addUpLeft(square.move(-1, 1))
             }
             if (square.canMoveRight()) {
-                list.add(square.move(1, 1))
+                mainMovement.addUpRight(square.move(1, 1))
             }
         }
-        return list.sortedBy { it.getColumn() }
+        return mainMovement
     }
 
     override fun journey(destination: Square): List<Square> = emptyList()

@@ -2,10 +2,10 @@ package chess.piece
 
 import chess.Color
 import chess.piece.movement.DiagonalMovement
+import chess.piece.movement.MainMovement
 import chess.piece.movement.RankFileMovement
 import chess.square.Square
 import java.lang.Error
-import kotlin.random.Random
 
 abstract class Piece(
     private val color: Color,
@@ -14,7 +14,8 @@ abstract class Piece(
     private val diagonalMovement: DiagonalMovement = DiagonalMovement(square)
     private val rankFileMovement: RankFileMovement = RankFileMovement(square)
 
-    abstract fun mainMove(): List<Square>
+    abstract fun mainMove(): MainMovement
+
     abstract fun journey(destination: Square): List<Square>
 
     fun move(destination: Square) {
@@ -29,17 +30,17 @@ abstract class Piece(
     fun getColor(): Color = this.color
     fun getPosition(): Square = this.square
 
-    fun isValid(destination: Square): Boolean = mainMove().any { square -> square.`is`(destination) }
+    fun isValid(destination: Square): Boolean = mainMove().hasDestination(destination)
 
     fun randomMove(): Square {
         val moves = mainMove()
         if (moves.isEmpty()) {
             throw Error("This piece can not be moved")
         }
-        val index = Random.nextInt(0, moves.size)
-        return moves[index]
+        return moves.random()
     }
 
-    fun possibleDiagonalMoves(maxMove: Int = 8): List<Square> = diagonalMovement.possibleMoves(maxMove)
-    fun possibleRankFileMoves(maxMove: Int = 8): List<Square> = rankFileMovement.possibleMoves(maxMove)
+    fun possibleDiagonalMoves(maxMove: Int = 8): MainMovement = diagonalMovement.possibleMoves(maxMove)
+
+    fun possibleRankFileMoves(maxMove: Int = 8): MainMovement = rankFileMovement.possibleMoves(maxMove)
 }

@@ -1,6 +1,7 @@
 package chess.piece
 
 import chess.Color
+import chess.piece.movement.MainMovement
 import chess.square.Column
 import chess.square.Row
 import chess.square.Square
@@ -12,23 +13,23 @@ internal class PawnTest {
     @Test
     fun givenPawnInCornerSquareWhenMainMoveThenReturnAllFirstSquareForward() {
         val pawn = Pawn(Color.BLACK, Square(Column.A, Row.ONE))
-        val list: List<Square> = listOf(
-            Square(Column.A, Row.TWO),
-            Square(Column.B, Row.TWO),
+        val mainMovement = MainMovement(
+            forward = mutableListOf(Square(Column.A, Row.TWO)),
+            upRightDiagonal = mutableListOf(Square(Column.B, Row.TWO))
         )
-        val result: List<Square> = pawn.mainMove()
-        assertEquals(list, result)
+        val result: MainMovement = pawn.mainMove()
+        assertEquals(mainMovement, result)
     }
 
     @Test
     fun givenPawnInCenterSquareWhenMainMoveThenReturnAllFirstSquareForward() {
         val pawn = Pawn(Color.BLACK, Square(Column.D, Row.FOUR))
-        val list: List<Square> = listOf(
-            Square(Column.C, Row.FIVE),
-            Square(Column.D, Row.FIVE),
-            Square(Column.E, Row.FIVE),
+        val mainMovement = MainMovement(
+            forward = mutableListOf(Square(Column.D, Row.FIVE)),
+            upLeftDiagonal = mutableListOf(Square(Column.C, Row.FIVE)),
+            upRightDiagonal = mutableListOf(Square(Column.E, Row.FIVE))
         )
-        val result: List<Square> = pawn.mainMove()
-        assertEquals(list, result)
+        val result: MainMovement = pawn.mainMove()
+        assertEquals(mainMovement, result)
     }
 }

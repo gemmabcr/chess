@@ -12,15 +12,15 @@ class RankFileMovement(
     private val canMoveDown = square.canMoveDown()
     private val canMoveLeft = square.canMoveLeft()
 
-    fun possibleMoves(maxMove: Int): List<Square> {
-        val movesList: MutableList<Square> = mutableListOf()
+    fun possibleMoves(maxMove: Int): MainMovement {
+        val mainMovement = MainMovement()
 
-        rankSquares(Vertical.UP, maxMove).forEach { square -> movesList.add(square) }
-        rankSquares(Vertical.DOWN, maxMove).forEach { square -> movesList.add(square) }
-        fileSquares(Horizontal.RIGHT, maxMove).forEach { square -> movesList.add(square) }
-        fileSquares(Horizontal.LEFT, maxMove).forEach { square -> movesList.add(square) }
+        rankSquares(Vertical.FORWARD, maxMove).forEach { square -> mainMovement.addForward(square) }
+        rankSquares(Vertical.BACKWARD, maxMove).forEach { square -> mainMovement.addBackward(square) }
+        fileSquares(Horizontal.RIGHT, maxMove).forEach { square -> mainMovement.addRight(square) }
+        fileSquares(Horizontal.LEFT, maxMove).forEach { square -> mainMovement.addLeft(square) }
 
-        return movesList.sortedBy { it.getColumn() }.toList()
+        return mainMovement
     }
 
     private fun rankSquares(vertical: Vertical, maxMove: Int): List<Square> {
@@ -62,7 +62,7 @@ class RankFileMovement(
     }
 
     private fun canRankMove(direction: Vertical) :Boolean = when {
-        direction `is` Vertical.UP -> canMoveUp
+        direction `is` Vertical.FORWARD -> canMoveUp
         else -> canMoveDown
     }
 
@@ -72,7 +72,7 @@ class RankFileMovement(
     }
 
     private fun maxRankMove(direction: Vertical): Int = when {
-        direction `is` Vertical.UP -> square.maxUpMovement()
+        direction `is` Vertical.FORWARD -> square.maxUpMovement()
         else -> square.maxDownMovement()
     }
 
@@ -82,7 +82,7 @@ class RankFileMovement(
     }
 
     private fun getRankIndex(direction: Vertical, index: Int) = when {
-        direction `is` Vertical.DOWN -> -index
+        direction `is` Vertical.BACKWARD -> -index
         else -> index
     }
 

@@ -52,7 +52,7 @@ class Pieces {
             else -> whitePieces
         }
         val kingPosition = teamPieces.find { it.isKing() }!!.getPosition()
-        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove() }
+        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove().allSquares() }
         return enemiesMovements.find { movement -> movement.`is`(kingPosition) } != null
     }
 
@@ -65,8 +65,8 @@ class Pieces {
             Color.WHITE -> blackPieces
             else -> whitePieces
         }
-        val kingMovements = teamPieces.find { it.isKing() }!!.mainMove()
-        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove() }
+        val kingMovements = teamPieces.find { it.isKing() }!!.mainMove().allSquares()
+        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove().allSquares() }
         return kingMovements.all { kingMovement -> enemiesMovements.any { it.`is`(kingMovement) } }
     }
 
