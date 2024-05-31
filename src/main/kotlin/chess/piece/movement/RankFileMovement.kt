@@ -31,19 +31,11 @@ class RankFileMovement(
 
     private fun rankFileSquares(direction: Direction, maxMove: Int): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
-        if (canMove(direction)) {
+        if (square.canMove(direction)) {
             for (i in 1..maxMove) {
                 possibleMoves.add(square.move(direction, i))
             }
         }
         return possibleMoves
-    }
-
-    private fun canMove(direction: Direction): Boolean = when {
-        direction `is` Direction.FORWARD -> square.canMoveForward()
-        direction `is` Direction.BACKWARD -> square.canMoveBackward()
-        direction `is` Direction.RIGHT -> square.canMoveRight()
-        direction `is` Direction.LEFT -> square.canMoveLeft()
-        else -> false
     }
 }

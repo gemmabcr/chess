@@ -18,34 +18,34 @@ class Knight(
 
         if (maxUpMove >= 2) {
             if (maxRightMove >= 1) {
-                mainMovement.addUpRight(square.move(1, 2))
+                mainMovement.addForwardRight(square.move(1, 2))
             }
             if (maxLeftMove >= 1) {
-                mainMovement.addUpLeft(square.move(-1, 2))
+                mainMovement.addForwardLeft(square.move(-1, 2))
             }
         }
         if (maxUpMove >= 1) {
             if (maxRightMove >= 2) {
-                mainMovement.addUpRight(square.move(2, 1))
+                mainMovement.addForwardRight(square.move(2, 1))
             }
             if (maxLeftMove >= 2) {
-                mainMovement.addUpLeft(square.move(-2, 1))
+                mainMovement.addForwardLeft(square.move(-2, 1))
             }
         }
         if (maxDownMove >= 1) {
             if (maxRightMove >= 2) {
-                mainMovement.addDownRight(square.move(2, -1))
+                mainMovement.addBackwardRight(square.move(2, -1))
             }
             if (maxLeftMove >= 2) {
-                mainMovement.addDownLeft(square.move(-2, -1))
+                mainMovement.addBackwardLeft(square.move(-2, -1))
             }
         }
         if (maxDownMove >= 2) {
             if (maxRightMove >= 1) {
-                mainMovement.addDownRight(square.move(1, -2))
+                mainMovement.addBackwardRight(square.move(1, -2))
             }
             if (maxLeftMove >= 1) {
-                mainMovement.addDownLeft(square.move(-1, -2))
+                mainMovement.addBackwardLeft(square.move(-1, -2))
             }
         }
 

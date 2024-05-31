@@ -8,6 +8,8 @@ data class Square(
 ) {
     private val color: Color = setColor()
 
+    fun getColumn(): Column = this.column
+    fun getRow(): Row = this.row
     fun getColor(): Color = this.color
 
     fun `is`(square: Square): Boolean = this.column == square.column && this.row == square.row
@@ -26,6 +28,23 @@ data class Square(
 
     fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
 
+    fun canMove(direction: Direction): Boolean = when {
+        direction `is` Direction.FORWARD -> canMoveForward()
+        direction `is` Direction.LEFT -> canMoveLeft()
+        direction `is` Direction.BACKWARD -> canMoveBackward()
+        direction `is` Direction.RIGHT -> canMoveRight()
+        direction `is` Direction.FORWARD_LEFT -> canMoveForward() && canMoveLeft()
+        direction `is` Direction.BACKWARD_LEFT -> canMoveBackward() && canMoveLeft()
+        direction `is` Direction.BACKWARD_RIGHT -> canMoveBackward() && canMoveRight()
+        direction `is` Direction.FORWARD_RIGHT -> canMoveForward() && canMoveRight()
+        else -> false
+    }
+
+    private fun canMoveForward(): Boolean = row.canMoveForward()
+    private fun canMoveRight(): Boolean = column.canMoveRight()
+    private fun canMoveBackward(): Boolean = row.canMoveBackward()
+    private fun canMoveLeft(): Boolean = column.canMoveLeft()
+
     fun move(direction: Direction, index: Int): Square = when {
         direction `is` Direction.FORWARD -> Square(column, row.move(index))
         direction `is` Direction.LEFT -> Square(column.move(-index), row)
@@ -40,11 +59,6 @@ data class Square(
 
     fun differenceColRow(destination: Square): Pair<Int, Int> =
         Pair(destination.column.ordinal - column.ordinal, destination.row.ordinal - row.ordinal)
-
-    fun canMoveForward(): Boolean = row.canMoveForward()
-    fun canMoveRight(): Boolean = column.canMoveRight()
-    fun canMoveBackward(): Boolean = row.canMoveBackward()
-    fun canMoveLeft(): Boolean = column.canMoveLeft()
 
     fun maxForwardMovement(): Int = row.maxForwardMovement()
     fun maxRightMovement(): Int = column.maxRightMovement()
@@ -64,9 +78,4 @@ data class Square(
         firstValue > lastValue -> lastValue
         else -> firstValue
     }
-
-    fun canMoveForwardRight(): Boolean = canMoveForward() && canMoveRight()
-    fun canMoveBackwardRight(): Boolean = canMoveBackward() && canMoveRight()
-    fun canMoveBackwardLeft(): Boolean = canMoveBackward() && canMoveLeft()
-    fun canMoveForwardLeft(): Boolean = canMoveForward() && canMoveLeft()
 }

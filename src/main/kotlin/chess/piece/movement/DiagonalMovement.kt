@@ -12,38 +12,30 @@ class DiagonalMovement(
         diagonalSquares(
             Direction.FORWARD_RIGHT,
             maxMove ?: square.maxForwardRightMovement()
-        ).forEach { square -> mainMovement.addUpRight(square) }
+        ).forEach { square -> mainMovement.addForwardRight(square) }
         diagonalSquares(
             Direction.FORWARD_LEFT,
             maxMove ?: square.maxForwardLeftMovement()
-        ).forEach { square -> mainMovement.addUpLeft(square) }
+        ).forEach { square -> mainMovement.addForwardLeft(square) }
         diagonalSquares(
             Direction.BACKWARD_RIGHT,
             maxMove ?: square.maxBackwardRightMovement()
-        ).forEach { square -> mainMovement.addDownRight(square) }
+        ).forEach { square -> mainMovement.addBackwardRight(square) }
         diagonalSquares(
             Direction.BACKWARD_LEFT,
             maxMove ?: square.maxBackwardLeftMovement()
-        ).forEach { square -> mainMovement.addDownLeft(square) }
+        ).forEach { square -> mainMovement.addBackwardLeft(square) }
 
         return mainMovement
     }
 
     private fun diagonalSquares(direction: Direction, maxMove: Int): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
-        if (canMoveDiagonally(direction)) {
+        if (square.canMove(direction)) {
             for (i in 1 ..maxMove) {
                 possibleMoves.add(square.move(direction, i))
             }
         }
         return possibleMoves
-    }
-
-    private fun canMoveDiagonally(direction: Direction): Boolean = when {
-        direction `is` Direction.FORWARD_RIGHT -> square.canMoveForwardRight()
-        direction `is` Direction.BACKWARD_RIGHT -> square.canMoveBackwardRight()
-        direction `is` Direction.BACKWARD_LEFT -> square.canMoveBackwardLeft()
-        direction `is` Direction.FORWARD_LEFT -> square.canMoveForwardLeft()
-        else -> false
     }
 }

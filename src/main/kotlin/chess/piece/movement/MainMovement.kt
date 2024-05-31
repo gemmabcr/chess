@@ -15,22 +15,22 @@ data class MainMovement(
     fun allSquares(): List<Square> =
         forward + backward + left + right + forwardLeft + backwardLeft + forwardRight + backwardRight
 
-    fun addUpRight(square: Square) {
+    fun addForwardRight(square: Square) {
         forwardRight.add(square)
         forwardRight.sortBy { it.getColumn() }
     }
 
-    fun addUpLeft(square: Square) {
+    fun addForwardLeft(square: Square) {
         forwardLeft.add(square)
         forwardLeft.sortBy { it.getColumn() }
     }
 
-    fun addDownRight(square: Square) {
+    fun addBackwardRight(square: Square) {
         backwardRight.add(square)
         backwardRight.sortBy { it.getColumn() }
     }
 
-    fun addDownLeft(square: Square) {
+    fun addBackwardLeft(square: Square) {
         backwardLeft.add(square)
         backwardLeft.sortBy { it.getColumn() }
     }
