@@ -8,19 +8,11 @@ import chess.square.Square
 
 class PieceSetOut {
     companion object {
-        fun setUpWhite(): MutableList<Piece> = Column.all()
+        fun setUp(color: Color): MutableList<Piece> = Column.all()
             .flatMap { column: Column ->
                 listOf(
-                    mainPiece(Color.WHITE, column, Row.ONE),
-                    Pawn(Color.WHITE, Square(column, Row.TWO)),
-                )
-            }.toMutableList()
-
-        fun setUpBlack(): MutableList<Piece> = Column.all()
-            .flatMap { column: Column ->
-                listOf(
-                    Pawn(Color.BLACK, Square(column, Row.SEVEN)),
-                    mainPiece(Color.BLACK, column, Row.EIGHT),
+                    mainPiece(color, column, color.rowMainPiece()),
+                    Pawn(color, Square(column, color.rowPawns())),
                 )
             }.toMutableList()
 

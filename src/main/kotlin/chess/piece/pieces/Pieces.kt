@@ -7,17 +7,11 @@ import chess.piece.movement.PieceDestination
 import chess.square.Square
 
 class Pieces {
-    private val blackPieces: MutableList<Piece> = PieceSetOut.setUpBlack()
-    private val whitePieces: MutableList<Piece> = PieceSetOut.setUpWhite()
+    private val pieces: Map<Color, MutableList<Piece>> = Color.entries.associateWith { PieceSetOut.setUp(it) }
 
-    fun allPieces(): List<Piece> {
-        return blackPieces.plus(whitePieces)
-    }
+    fun allPieces(): List<Piece> = pieces.values.flatten().toList()
 
-    fun color(color: Color): List<Piece> = when (color) {
-        Color.BLACK -> blackPieces
-        else -> whitePieces
-    }
+    fun color(color: Color): List<Piece> = getTeamPieces(color)
 
     fun isValid(movement: PieceDestination): Boolean {
         val correctMove = movement.piece.isValid(movement.destination)
@@ -43,30 +37,25 @@ class Pieces {
     fun isCheck(): Boolean = isCheckBy(Color.BLACK) || isCheckBy(Color.WHITE)
 
     private fun isCheckBy(kingColor: Color): Boolean {
-        val teamPieces = when (kingColor) {
-            Color.WHITE -> whitePieces
-            else -> blackPieces
-        }
-        val enemiesPieces = when (kingColor) {
-            Color.WHITE -> blackPieces
-            else -> whitePieces
-        }
+        val teamPieces = getTeamPieces(kingColor)
+        val enemiesPieces = getEnemiesPieces(kingColor)
         val kingPosition = teamPieces.find { it.isKing() }!!.getPosition()
-        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove().allSquares() }
+        val enemiesMovements: List<Square> =
+            enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove().allSquares() }
         return enemiesMovements.find { movement -> movement.`is`(kingPosition) } != null
     }
 
+    private fun getEnemiesPieces(kingColor: Color) =
+        pieces.filter { it.key.ordinal != kingColor.ordinal }.values.flatten()
+
+    private fun getTeamPieces(kingColor: Color) = pieces[kingColor]!!.toList()
+
     private fun isCheckMate(kingColor: Color): Boolean {
-        val teamPieces = when (kingColor) {
-            Color.WHITE -> whitePieces
-            else -> blackPieces
-        }
-        val enemiesPieces = when (kingColor) {
-            Color.WHITE -> blackPieces
-            else -> whitePieces
-        }
+        val teamPieces = getTeamPieces(kingColor)
+        val enemiesPieces = getEnemiesPieces(kingColor)
         val kingMovements = teamPieces.find { it.isKing() }!!.mainMove().allSquares()
-        val enemiesMovements: List<Square> = enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove().allSquares() }
+        val enemiesMovements: List<Square> =
+            enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove().allSquares() }
         return kingMovements.all { kingMovement -> enemiesMovements.any { it.`is`(kingMovement) } }
     }
 
@@ -79,14 +68,13 @@ class Pieces {
 
     fun checkRemoveEnemy(movement: PieceDestination) {
         val destinationHasPiece = this.allPieces().find { piece: Piece -> piece.`is`(movement.destination) }
-        if (destinationHasPiece != null) if (!(destinationHasPiece.`is`(movement.piece.getColor()))) {
+        if (destinationHasPiece != null && !(destinationHasPiece.`is`(movement.piece.getColor()))) {
             this.remove(destinationHasPiece)
         }
     }
 
-    private fun remove(piece: Piece) = when (piece.getColor()) {
-        Color.WHITE -> whitePieces.remove(piece)
-        else -> blackPieces.remove(piece)
+    private fun remove(piece: Piece) {
+        pieces[piece.getColor()]!!.remove(piece)
     }
 
     fun move(movement: PieceDestination) {
