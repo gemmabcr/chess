@@ -1,14 +1,14 @@
 package chess.piece
 
 import chess.Color
-import chess.piece.movement.MainMovement
+import chess.square.Direction
 import chess.square.Square
 
 class Rook(
     color: Color,
     private val square: Square
 ): Piece(color, square) {
-    override fun mainMove(): MainMovement = possibleRankFileMoves()
+    override fun directions(): List<Direction> = Direction.straights()
 
     override fun journey(destination: Square): List<Square> {
         val moves = square.differenceColRow(destination)

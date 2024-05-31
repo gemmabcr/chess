@@ -1,19 +1,14 @@
 package chess.piece
 
 import chess.Color
-import chess.piece.movement.MainMovement
+import chess.square.Direction
 import chess.square.Square
 
 class King(
     color: Color,
     val square: Square
-) : Piece(color, square) {
-
-    override fun mainMove(): MainMovement {
-        var mainMovement = possibleDiagonalMoves(1)
-        mainMovement = mainMovement.copy(possibleRankFileMoves(1))
-        return mainMovement
-    }
+) : Piece(color, square, 1) {
+    override fun directions(): List<Direction> = Direction.all()
 
     override fun journey(destination: Square): List<Square> = emptyList()
 

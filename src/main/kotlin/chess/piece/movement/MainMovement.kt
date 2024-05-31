@@ -1,5 +1,6 @@
 package chess.piece.movement
 
+import chess.square.Direction
 import chess.square.Square
 
 data class MainMovement(
@@ -15,42 +16,42 @@ data class MainMovement(
     fun allSquares(): List<Square> =
         forward + backward + left + right + forwardLeft + backwardLeft + forwardRight + backwardRight
 
-    fun addForwardRight(square: Square) {
+    private fun addForwardRight(square: Square) {
         forwardRight.add(square)
         forwardRight.sortBy { it.getColumn() }
     }
 
-    fun addForwardLeft(square: Square) {
+    private fun addForwardLeft(square: Square) {
         forwardLeft.add(square)
         forwardLeft.sortBy { it.getColumn() }
     }
 
-    fun addBackwardRight(square: Square) {
+    private fun addBackwardRight(square: Square) {
         backwardRight.add(square)
         backwardRight.sortBy { it.getColumn() }
     }
 
-    fun addBackwardLeft(square: Square) {
+    private fun addBackwardLeft(square: Square) {
         backwardLeft.add(square)
         backwardLeft.sortBy { it.getColumn() }
     }
 
-    fun addForward(square: Square) {
+    private fun addForward(square: Square) {
         forward.add(square)
         forward.sortBy { it.getRow() }
     }
 
-    fun addBackward(square: Square) {
+    private fun addBackward(square: Square) {
         backward.add(square)
         backward.sortBy { it.getRow() }
     }
 
-    fun addRight(square: Square) {
+    private fun addRight(square: Square) {
         right.add(square)
         right.sortBy { it.getColumn() }
     }
 
-    fun addLeft(square: Square) {
+    private fun addLeft(square: Square) {
         left.add(square)
         left.sortBy { it.getColumn() }
     }
@@ -61,26 +62,15 @@ data class MainMovement(
 
     fun random(): Square = allSquares().random()
 
-    fun copy(moves: MainMovement): MainMovement {
-        val forwardCopy = forward + moves.forward
-        val backwardCopy = backward + moves.backward
-        val leftCopy = left + moves.left
-        val rightCopy = right + moves.right
-        val upLeftDiagonalCopy = forwardLeft + moves.forwardLeft
-        val downLeftDiagonalCopy = backwardLeft + moves.backwardLeft
-        val upRightDiagonalCopy = forwardRight + moves.forwardRight
-        val downRightDiagonalCopy = backwardRight + moves.backwardRight
-
-
-        return MainMovement(
-            forward = forwardCopy.sortedBy { it.getRow() }.toMutableList(),
-            backward = backwardCopy.sortedBy { it.getRow() }.toMutableList(),
-            left = leftCopy.sortedBy { it.getColumn() }.toMutableList(),
-            right = rightCopy.sortedBy { it.getColumn() }.toMutableList(),
-            forwardLeft = upLeftDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
-            backwardLeft = downLeftDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
-            forwardRight = upRightDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
-            backwardRight = downRightDiagonalCopy.sortedBy { it.getColumn() }.toMutableList(),
-        )
+    fun add(direction: Direction, square: Square) = when {
+        direction `is` Direction.FORWARD -> addForward(square)
+        direction `is` Direction.LEFT -> addLeft(square)
+        direction `is` Direction.BACKWARD -> addBackward(square)
+        direction `is` Direction.RIGHT -> addRight(square)
+        direction `is` Direction.FORWARD_LEFT -> addForwardLeft(square)
+        direction `is` Direction.BACKWARD_LEFT -> addBackwardLeft(square)
+        direction `is` Direction.BACKWARD_RIGHT -> addBackwardRight(square)
+        direction `is` Direction.FORWARD_RIGHT -> addForwardRight(square)
+        else -> throw Exception("Can't add square with $direction")
     }
 }

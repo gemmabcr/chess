@@ -1,20 +1,22 @@
 package chess.piece
 
 import chess.Color
-import chess.piece.movement.DiagonalMovement
+import chess.piece.movement.Movement
 import chess.piece.movement.MainMovement
-import chess.piece.movement.RankFileMovement
+import chess.square.Direction
 import chess.square.Square
 import java.lang.Error
 
 abstract class Piece(
     private val color: Color,
-    private var square: Square
+    private var square: Square,
+    private val maxMove: Int? = null
 ) {
-    private val diagonalMovement: DiagonalMovement = DiagonalMovement(square)
-    private val rankFileMovement: RankFileMovement = RankFileMovement(square)
+    private val movement: Movement = Movement(square, this.directions())
 
-    abstract fun mainMove(): MainMovement
+    abstract fun directions(): List<Direction>
+
+    open fun mainMove(): MainMovement = movement.possibleMoves(maxMove)
 
     abstract fun journey(destination: Square): List<Square>
 
@@ -39,8 +41,4 @@ abstract class Piece(
         }
         return moves.random()
     }
-
-    fun possibleDiagonalMoves(maxMove: Int? = null): MainMovement = diagonalMovement.possibleMoves(maxMove)
-
-    fun possibleRankFileMoves(maxMove: Int? = null): MainMovement = rankFileMovement.possibleMoves(maxMove)
 }

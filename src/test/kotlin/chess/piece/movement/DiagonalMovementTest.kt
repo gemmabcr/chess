@@ -1,6 +1,7 @@
 package chess.piece.movement
 
 import chess.square.Column
+import chess.square.Direction
 import chess.square.Row
 import chess.square.Square
 import kotlin.test.Test
@@ -9,8 +10,8 @@ import kotlin.test.assertEquals
 internal class DiagonalMovementTest {
 
     @Test
-    fun givenDiagonalMovementWithCornerSquareWhenPossibleMovementThenReturnOnlyOneDiagonal() {
-        val movement = DiagonalMovement(Square(Column.A, Row.ONE))
+    fun givenMovementWithCornerSquareWhenPossibleMovementThenReturnOnlyOneDiagonal() {
+        val movement = Movement(Square(Column.A, Row.ONE), Direction.diagonals())
         val mainMovement = MainMovement(
             forwardRight = mutableListOf(
                 Square(Column.B, Row.TWO),
@@ -27,8 +28,8 @@ internal class DiagonalMovementTest {
     }
 
     @Test
-    fun givenDiagonalMovementWithFirstRowSquareWhenPossibleMovementThenReturnOnlyTwoDiagonals() {
-        val movement = DiagonalMovement(Square(Column.E, Row.ONE))
+    fun givenMovementWithFirstRowSquareWhenPossibleMovementThenReturnOnlyTwoDiagonals() {
+        val movement = Movement(Square(Column.E, Row.ONE), Direction.diagonals())
         val mainMovement = MainMovement(
             forwardLeft = mutableListOf(
                 Square(Column.A, Row.FIVE),
@@ -47,8 +48,8 @@ internal class DiagonalMovementTest {
     }
 
     @Test
-    fun givenDiagonalMovementWithCenteredSquareWhenPossibleMovementThenReturnFourDiagonals() {
-        val movement = DiagonalMovement(Square(Column.E, Row.FOUR))
+    fun givenMovementWithCenteredSquareWhenPossibleMovementThenReturnFourDiagonals() {
+        val movement = Movement(Square(Column.E, Row.FOUR), Direction.diagonals())
         val mainMovement = MainMovement(
             forwardLeft = mutableListOf(
                 Square(Column.A, Row.EIGHT),
