@@ -1,7 +1,7 @@
 package chess.square
 
 import chess.Color
-import chess.square.direction.Diagonal
+import chess.square.direction.Direction
 
 data class Square(
     private val column: Column,
@@ -31,11 +31,12 @@ data class Square(
 
     fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
 
-    fun move(diagonal: Diagonal, index: Int): Square = when {
-        diagonal `is` Diagonal.FORWARD_RIGHT -> Square(column.move(index), row.move(index))
-        diagonal `is` Diagonal.BACKWARD_RIGHT -> Square(column.move(index), row.move(-index))
-        diagonal `is` Diagonal.BACKWARD_LEFT -> Square(column.move(-index), row.move(-index))
-        else -> Square(column.move(-index), row.move(index))
+    fun move(direction: Direction, index: Int): Square = when {
+        direction `is` Direction.FORWARD_RIGHT -> Square(column.move(index), row.move(index))
+        direction `is` Direction.BACKWARD_RIGHT -> Square(column.move(index), row.move(-index))
+        direction `is` Direction.BACKWARD_LEFT -> Square(column.move(-index), row.move(-index))
+        direction `is` Direction.FORWARD_LEFT -> Square(column.move(-index), row.move(index))
+        else -> throw Exception("Can't move diagonal with $direction")
     }
 
     fun differenceColRow(destination: Square): Pair<Int, Int> =
