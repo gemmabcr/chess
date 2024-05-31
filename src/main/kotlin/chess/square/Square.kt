@@ -1,17 +1,12 @@
 package chess.square
 
 import chess.Color
-import chess.square.direction.Direction
 
 data class Square(
     private val column: Column,
     private val row: Row
 ) {
     private val color: Color = setColor()
-
-    fun getColumn(): Column = this.column
-
-    fun getRow(): Row = this.row
 
     fun getColor(): Color = this.color
 
@@ -32,10 +27,14 @@ data class Square(
     fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
 
     fun move(direction: Direction, index: Int): Square = when {
-        direction `is` Direction.FORWARD_RIGHT -> Square(column.move(index), row.move(index))
-        direction `is` Direction.BACKWARD_RIGHT -> Square(column.move(index), row.move(-index))
-        direction `is` Direction.BACKWARD_LEFT -> Square(column.move(-index), row.move(-index))
+        direction `is` Direction.FORWARD -> Square(column, row.move(index))
+        direction `is` Direction.LEFT -> Square(column.move(-index), row)
+        direction `is` Direction.BACKWARD -> Square(column, row.move(-index))
+        direction `is` Direction.RIGHT -> Square(column.move(index), row)
         direction `is` Direction.FORWARD_LEFT -> Square(column.move(-index), row.move(index))
+        direction `is` Direction.BACKWARD_LEFT -> Square(column.move(-index), row.move(-index))
+        direction `is` Direction.BACKWARD_RIGHT -> Square(column.move(index), row.move(-index))
+        direction `is` Direction.FORWARD_RIGHT -> Square(column.move(index), row.move(index))
         else -> throw Exception("Can't move diagonal with $direction")
     }
 

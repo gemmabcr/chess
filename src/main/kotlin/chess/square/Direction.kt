@@ -1,4 +1,4 @@
-package chess.square.direction
+package chess.square
 
 enum class Direction {
     FORWARD, BACKWARD, RIGHT, LEFT, FORWARD_LEFT, FORWARD_RIGHT, BACKWARD_LEFT, BACKWARD_RIGHT;

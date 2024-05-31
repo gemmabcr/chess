@@ -1,7 +1,7 @@
 package chess.piece.movement
 
 import chess.square.Square
-import chess.square.direction.Direction
+import chess.square.Direction
 
 class DiagonalMovement(
     private val square: Square,

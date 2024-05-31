@@ -1,93 +1,49 @@
 package chess.piece.movement
 
 import chess.square.Square
-import chess.square.direction.Horizontal
-import chess.square.direction.Vertical
+import chess.square.Direction
 
 class RankFileMovement(
     private val square: Square,
-){
-    private val canMoveUp = square.canMoveForward()
-    private val canMoveRight = square.canMoveRight()
-    private val canMoveDown = square.canMoveBackward()
-    private val canMoveLeft = square.canMoveLeft()
-
-    fun possibleMoves(maxMove: Int): MainMovement {
+) {
+    fun possibleMoves(maxMove: Int? = null): MainMovement {
         val mainMovement = MainMovement()
 
-        rankSquares(Vertical.FORWARD, maxMove).forEach { square -> mainMovement.addForward(square) }
-        rankSquares(Vertical.BACKWARD, maxMove).forEach { square -> mainMovement.addBackward(square) }
-        fileSquares(Horizontal.RIGHT, maxMove).forEach { square -> mainMovement.addRight(square) }
-        fileSquares(Horizontal.LEFT, maxMove).forEach { square -> mainMovement.addLeft(square) }
+        rankFileSquares(
+            Direction.FORWARD,
+            maxMove ?: square.maxForwardMovement()
+        ).forEach { square -> mainMovement.addForward(square) }
+        rankFileSquares(
+            Direction.BACKWARD,
+            maxMove ?: square.maxBackwardMovement()
+        ).forEach { square -> mainMovement.addBackward(square) }
+        rankFileSquares(
+            Direction.RIGHT,
+            maxMove ?: square.maxRightMovement()
+        ).forEach { square -> mainMovement.addRight(square) }
+        rankFileSquares(
+            Direction.LEFT,
+            maxMove ?: square.maxLeftMovement()
+        ).forEach { square -> mainMovement.addLeft(square) }
 
         return mainMovement
     }
 
-    private fun rankSquares(vertical: Vertical, maxMove: Int): List<Square> {
+    private fun rankFileSquares(direction: Direction, maxMove: Int): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
-        if (canRankMove(vertical)) {
-            val maxRankMovement = when {
-                maxMove != 8 -> maxMove
-                else -> maxRankMove(vertical)
-            }
-            for (i in 1..maxRankMovement) {
-                possibleMoves.add(
-                    square.move(
-                        0,
-                        getRankIndex(vertical, i)
-                    )
-                )
+        if (canMove(direction)) {
+            for (i in 1..maxMove) {
+                possibleMoves.add(square.move(direction, i))
             }
         }
         return possibleMoves
     }
 
-    private fun fileSquares(horizontal: Horizontal, maxMove: Int): List<Square> { // File is row
-        val possibleMoves: MutableList<Square> = mutableListOf()
-        if (canFileMove(horizontal)) {
-            val maxFileMovement = when {
-                maxMove != 8 -> maxMove
-                else -> maxFileMove(horizontal)
-            }
-            for (i in 1..maxFileMovement) {
-                possibleMoves.add(
-                    square.move(
-                        getFileIndex(horizontal, i),
-                        0
-                    )
-                )
-            }
-        }
-        return possibleMoves
-    }
-
-    private fun canRankMove(direction: Vertical) :Boolean = when {
-        direction `is` Vertical.FORWARD -> canMoveUp
-        else -> canMoveDown
-    }
-
-    private fun canFileMove(direction: Horizontal) :Boolean = when {
-        direction `is` Horizontal.RIGHT -> canMoveRight
-        else -> canMoveLeft
-    }
-
-    private fun maxRankMove(direction: Vertical): Int = when {
-        direction `is` Vertical.FORWARD -> square.maxForwardMovement()
-        else -> square.maxBackwardMovement()
-    }
-
-    private fun maxFileMove(direction: Horizontal): Int = when {
-        direction `is` Horizontal.RIGHT -> square.maxRightMovement()
-        else -> square.maxLeftMovement()
-    }
-
-    private fun getRankIndex(direction: Vertical, index: Int) = when {
-        direction `is` Vertical.BACKWARD -> -index
-        else -> index
-    }
-
-    private fun getFileIndex(direction: Horizontal, index: Int) = when {
-        direction `is` Horizontal.LEFT -> -index
-        else -> index
+    private fun canMove(direction: Direction): Boolean = when {
+        direction `is` Direction.FORWARD -> square.canMoveForward()
+        direction `is` Direction.BACKWARD -> square.canMoveBackward()
+        direction `is` Direction.RIGHT -> square.canMoveRight()
+        direction `is` Direction.LEFT -> square.canMoveLeft()
+        else -> false
     }
 }

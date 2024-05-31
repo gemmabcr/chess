@@ -42,5 +42,5 @@ abstract class Piece(
 
     fun possibleDiagonalMoves(maxMove: Int? = null): MainMovement = diagonalMovement.possibleMoves(maxMove)
 
-    fun possibleRankFileMoves(maxMove: Int = 8): MainMovement = rankFileMovement.possibleMoves(maxMove)
+    fun possibleRankFileMoves(maxMove: Int? = null): MainMovement = rankFileMovement.possibleMoves(maxMove)
 }
