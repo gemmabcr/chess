@@ -21,14 +21,14 @@ class Movement(
     }
 
     private fun maxMovement(direction: Direction): Int = when {
-        direction `is` Direction.FORWARD -> square.maxForwardMovement()
-        direction `is` Direction.LEFT -> square.maxLeftMovement()
-        direction `is` Direction.BACKWARD -> square.maxBackwardMovement()
-        direction `is` Direction.RIGHT -> square.maxRightMovement()
-        direction `is` Direction.FORWARD_LEFT -> square.maxForwardLeftMovement()
-        direction `is` Direction.BACKWARD_LEFT -> square.maxBackwardLeftMovement()
-        direction `is` Direction.BACKWARD_RIGHT -> square.maxBackwardRightMovement()
-        direction `is` Direction.FORWARD_RIGHT -> square.maxForwardRightMovement()
+        direction `is` Direction.FORWARD -> square.maxMove(Direction.FORWARD)
+        direction `is` Direction.LEFT -> square.maxMove(Direction.LEFT)
+        direction `is` Direction.BACKWARD -> square.maxMove(Direction.BACKWARD)
+        direction `is` Direction.RIGHT -> square.maxMove(Direction.RIGHT)
+        direction `is` Direction.FORWARD_LEFT -> square.maxMove(Direction.FORWARD_LEFT)
+        direction `is` Direction.BACKWARD_LEFT -> square.maxMove(Direction.BACKWARD_LEFT)
+        direction `is` Direction.BACKWARD_RIGHT -> square.maxMove(Direction.BACKWARD_RIGHT)
+        direction `is` Direction.FORWARD_RIGHT -> square.maxMove(Direction.FORWARD_RIGHT)
         else -> 0
     }
 

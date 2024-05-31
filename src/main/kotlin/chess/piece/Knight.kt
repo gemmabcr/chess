@@ -13,10 +13,10 @@ class Knight(
     override fun mainMove(): MainMovement {
         val mainMovement = MainMovement(mutableMapOf())
 
-        val maxForwardMove = square.maxForwardMovement()
-        val maxRightMove = square.maxRightMovement()
-        val maxBackwardMove = square.maxBackwardMovement()
-        val maxLeftMove = square.maxLeftMovement()
+        val maxForwardMove = square.maxMove(Direction.FORWARD)
+        val maxRightMove = square.maxMove(Direction.RIGHT)
+        val maxBackwardMove = square.maxMove(Direction.BACKWARD)
+        val maxLeftMove = square.maxMove(Direction.LEFT)
 
         if (maxForwardMove >= 2) {
             if (maxRightMove >= 1) {
