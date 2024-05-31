@@ -8,7 +8,7 @@ class Movement(
     private val directions: List<Direction>
 ) {
     fun possibleMoves(maxMove: Int? = null): MainMovement {
-        val mainMovement = MainMovement()
+        val mainMovement = MainMovement(mutableMapOf())
 
         for(direction in directions) {
             squares(

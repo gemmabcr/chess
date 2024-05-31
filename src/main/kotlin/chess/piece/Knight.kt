@@ -12,7 +12,7 @@ class Knight(
     override fun directions(): List<Direction> = Direction.diagonals()
 
     override fun mainMove(): MainMovement {
-        val mainMovement = MainMovement()
+        val mainMovement = MainMovement(mutableMapOf())
 
         val maxForwardMove = square.maxForwardMovement()
         val maxRightMove = square.maxRightMovement()
