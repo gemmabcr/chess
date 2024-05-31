@@ -3,7 +3,7 @@ package chess.player
 import chess.Color
 import chess.ui.Ui
 import chess.piece.Piece
-import chess.piece.movement.PieceDestination
+import chess.piece.PieceDestination
 import chess.square.Square
 
 class UserPlayer(

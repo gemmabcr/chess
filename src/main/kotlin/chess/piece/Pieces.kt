@@ -1,9 +1,7 @@
-package chess.piece.pieces
+package chess.piece
 
 import chess.Color
 import chess.ChessResult
-import chess.piece.Piece
-import chess.piece.movement.PieceDestination
 import chess.square.Square
 
 class Pieces {

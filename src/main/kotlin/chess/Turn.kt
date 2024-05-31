@@ -1,6 +1,6 @@
 package chess
 
-import chess.piece.pieces.Pieces
+import chess.piece.Pieces
 import chess.player.ComputerPlayer
 import chess.player.Player
 import chess.player.UserPlayer

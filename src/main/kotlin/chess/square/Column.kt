@@ -4,18 +4,18 @@ enum class Column {
     A, B, C, D, E, F, G, H;
 
     infix fun `is`(column: Column): Boolean = this == column
+
+    fun canMoveRight(): Boolean = this != H
+
+    fun canMoveLeft(): Boolean = this != A
+
     fun maxRightMovement(): Int = H.ordinal - this.ordinal
+
     fun maxLeftMovement(): Int = this.ordinal
-    fun move(columnMove: Int): Column {
-        if (this == H) {
-            return this
-        }
-        return entries[this.ordinal + columnMove]
-    }
-    fun canMoveRight(): Boolean = this.ordinal < H.ordinal
-    fun canMoveLeft(): Boolean = this.ordinal > A.ordinal
+
+    fun move(columnMove: Int): Column = entries[this.ordinal + columnMove]
 
     companion object {
-        fun all() = arrayOf(A, B, C, D, E, F, G, H)
+        fun all() = entries
     }
 }

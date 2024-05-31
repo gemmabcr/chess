@@ -1,7 +1,6 @@
-package chess.piece.pieces
+package chess.piece
 
 import chess.Color
-import chess.piece.*
 import chess.square.Column
 import chess.square.Row
 import chess.square.Square

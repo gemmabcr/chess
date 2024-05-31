@@ -1,4 +1,4 @@
-package chess.piece.movement
+package chess.piece
 
 import chess.square.Square
 import chess.square.Direction

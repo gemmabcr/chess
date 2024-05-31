@@ -2,7 +2,7 @@ package chess.player
 
 import chess.Color
 import chess.piece.Piece
-import chess.piece.movement.PieceDestination
+import chess.piece.PieceDestination
 import kotlin.random.Random
 
 class ComputerPlayer(

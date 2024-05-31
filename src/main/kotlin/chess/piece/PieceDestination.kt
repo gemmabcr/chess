@@ -1,6 +1,5 @@
-package chess.piece.movement
+package chess.piece
 
-import chess.piece.Piece
 import chess.square.Square
 
 data class PieceDestination(

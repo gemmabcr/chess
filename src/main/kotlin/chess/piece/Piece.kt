@@ -1,8 +1,6 @@
 package chess.piece
 
 import chess.Color
-import chess.piece.movement.Movement
-import chess.piece.movement.MainMovement
 import chess.square.Direction
 import chess.square.Square
 import java.lang.Error

@@ -1,7 +1,6 @@
 package chess.piece
 
 import chess.Color
-import chess.piece.movement.MainMovement
 import chess.square.Column
 import chess.square.Direction
 import chess.square.Row
