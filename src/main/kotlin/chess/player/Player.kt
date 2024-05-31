@@ -9,5 +9,6 @@ abstract class Player(
     private val pieces: List<Piece>
 ) {
     abstract fun pieceMovement(): PieceDestination
+
     fun getColor(): Color = this.color
 }
