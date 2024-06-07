@@ -10,23 +10,11 @@ class Movement(
         for (direction in directions) {
             squares(
                 direction,
-                maxMove ?: maxMovement(direction)
+                maxMove ?: MaxMovement(direction, square).total()
             ).forEach { square -> mainMovement.add(direction, square) }
         }
 
         return mainMovement
-    }
-
-    private fun maxMovement(direction: Direction): Int = when {
-        direction `is` Direction.FORWARD -> square.maxMove(Direction.FORWARD)
-        direction `is` Direction.LEFT -> square.maxMove(Direction.LEFT)
-        direction `is` Direction.BACKWARD -> square.maxMove(Direction.BACKWARD)
-        direction `is` Direction.RIGHT -> square.maxMove(Direction.RIGHT)
-        direction `is` Direction.FORWARD_LEFT -> square.maxMove(Direction.FORWARD_LEFT)
-        direction `is` Direction.BACKWARD_LEFT -> square.maxMove(Direction.BACKWARD_LEFT)
-        direction `is` Direction.BACKWARD_RIGHT -> square.maxMove(Direction.BACKWARD_RIGHT)
-        direction `is` Direction.FORWARD_RIGHT -> square.maxMove(Direction.FORWARD_RIGHT)
-        else -> 0
     }
 
     private fun squares(direction: Direction, maxMove: Int): List<Square> {

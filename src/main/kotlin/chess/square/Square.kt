@@ -60,8 +60,6 @@ data class Square(
         else -> throw Exception("Can't move diagonal with $direction")
     }
 
-    fun maxMove(direction: Direction): Int = MaxMovement(direction, Square(column, row)).total()
-
     override fun toString(): String {
         return "${this.column}-${this.row.ordinal + 1}"
     }

@@ -3,6 +3,7 @@ package chess.piece
 import chess.Color
 import chess.square.Direction
 import chess.square.MainMovement
+import chess.square.MaxMovement
 import chess.square.Square
 
 class Knight(
@@ -12,10 +13,10 @@ class Knight(
     override fun mainMove(): MainMovement {
         val mainMovement = MainMovement(mutableMapOf())
 
-        val maxForwardMove = square.maxMove(Direction.FORWARD)
-        val maxRightMove = square.maxMove(Direction.RIGHT)
-        val maxBackwardMove = square.maxMove(Direction.BACKWARD)
-        val maxLeftMove = square.maxMove(Direction.LEFT)
+        val maxForwardMove: Int = MaxMovement(Direction.FORWARD, square).total()
+        val maxRightMove: Int = MaxMovement(Direction.RIGHT, square).total()
+        val maxBackwardMove: Int = MaxMovement(Direction.BACKWARD, square).total()
+        val maxLeftMove: Int = MaxMovement(Direction.LEFT, square).total()
 
         if (maxForwardMove >= 2) {
             if (maxRightMove >= 1) {
