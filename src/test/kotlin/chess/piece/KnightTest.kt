@@ -38,4 +38,13 @@ internal class KnightTest {
         val result: MainMovement = knight.mainMove()
         assertEquals(mainMovement, result)
     }
+
+    @Test
+    fun givenDestinationWhenJourneyThenReturnEmptyList() {
+        val knight = Knight(Color.BLACK, Square(Column.D, Row.FOUR))
+        val pieceDestination = PieceDestination(knight, Square(Column.F, Row.FOUR))
+        val journey = emptyList<Square>()
+
+        assertEquals(journey, knight.journey(pieceDestination))
+    }
 }

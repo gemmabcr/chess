@@ -43,4 +43,13 @@ internal class KingTest {
         val result: MainMovement = king.mainMove()
         assertEquals(mainMovement, result)
     }
+
+    @Test
+    fun givenDestinationWhenJourneyThenReturnEmptyList() {
+        val king = King(Color.BLACK, Square(Column.D, Row.FOUR))
+        val pieceDestination = PieceDestination(king, Square(Column.E, Row.FOUR))
+        val journey = emptyList<Square>()
+
+        assertEquals(journey, king.journey(pieceDestination))
+    }
 }

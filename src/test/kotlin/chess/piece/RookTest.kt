@@ -83,4 +83,18 @@ internal class RookTest {
         val result: MainMovement = rook.mainMove()
         assertEquals(mainMovement, result)
     }
+
+    @Test
+    fun givenDestinationWhenJourneyThenReturnAllSquaresInBetween() {
+        val queen = Queen(Color.BLACK, Square(Column.G, Row.ONE))
+        val pieceDestination = PieceDestination(queen, Square(Column.G, Row.SIX))
+        val journey = listOf(
+            Square(Column.G, Row.TWO),
+            Square(Column.G, Row.THREE),
+            Square(Column.G, Row.FOUR),
+            Square(Column.G, Row.FIVE),
+        )
+
+        assertEquals(journey, queen.journey(pieceDestination))
+    }
 }

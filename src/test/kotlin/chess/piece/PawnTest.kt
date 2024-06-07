@@ -36,4 +36,13 @@ internal class PawnTest {
         val result: MainMovement = pawn.mainMove()
         assertEquals(mainMovement, result)
     }
+
+    @Test
+    fun givenDestinationWhenJourneyThenReturnEmptyList() {
+        val pawn = Pawn(Color.BLACK, Square(Column.D, Row.FOUR))
+        val pieceDestination = PieceDestination(pawn, Square(Column.D, Row.SIX))
+        val journey = emptyList<Square>()
+
+        assertEquals(journey, pawn.journey(pieceDestination))
+    }
 }

@@ -83,4 +83,16 @@ internal class BishopTest {
 
         assertEquals(journey, bishop.journey(pieceDestination))
     }
+
+    @Test
+    fun givenDestination2WhenJourneyThenReturnAllSquaresInBetween() {
+        val bishop = Bishop(Color.BLACK, Square(Column.D, Row.FOUR))
+        val pieceDestination = PieceDestination(bishop, Square(Column.G, Row.ONE))
+        val journey = listOf(
+            Square(Column.E, Row.THREE),
+            Square(Column.F, Row.TWO),
+        )
+
+        assertEquals(journey, bishop.journey(pieceDestination))
+    }
 }

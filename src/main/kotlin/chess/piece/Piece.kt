@@ -21,7 +21,12 @@ abstract class Piece(
             return emptyList()
         }
         val movesList: MutableList<Square> = mutableListOf()
-        for (i in 1..<abs(destination.squaresBetween())) {
+        var index: Int = destination.squaresBetween();
+        if (index < 0) {
+            index = abs(index)
+        }
+        println(index)
+        for (i in 1.. index) {
             movesList.add(square.move(destination.direction(), i))
         }
         return movesList.toList()
