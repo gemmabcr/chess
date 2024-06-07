@@ -1,8 +1,10 @@
 package chess
 
+import chess.piece.Piece
 import chess.piece.Pieces
 import chess.player.Player
 import chess.square.Column
+import chess.square.Journey
 import chess.square.Row
 import chess.square.Square
 import chess.ui.Ui
@@ -10,7 +12,7 @@ import chess.ui.Ui
 class Chess {
     private val ui: Ui = Ui()
     private val pieces: Pieces = Pieces()
-    private val turn: Turn = Turn(ui, pieces)
+    private val turn: Turn = Turn(ui)
     private val board: List<List<Square>> = createBoard()
 
     init {
@@ -35,17 +37,19 @@ class Chess {
                 ui.print(pieces.result())
             }
             turn.next()
-        } while(!pieces.hasResult())
+        } while (!pieces.hasResult())
         ui.print(pieces.result())
     }
 
     private fun validMove(player: Player) {
         do {
-            val movement = player.pieceMovement()
-            val validMove = pieces.isValid(movement)
-            pieces.move(movement)
-            pieces.checkRemoveEnemy(movement)
-            if (!validMove) {
+            val journey: Journey = player.pieceMovement(pieces.color(player.getColor()))
+            val validMove: Boolean = pieces.isValid(journey)
+            if (validMove) {
+                val piece: Piece = pieces.allPieces().first { it.getPosition().`is`(journey.origin()) }
+                pieces.maybeRemoveEnemy(journey.destination(), piece.enemyColor())
+                piece.move(journey.destination())
+            } else {
                 ui.invalidMove()
             }
         } while (!validMove)

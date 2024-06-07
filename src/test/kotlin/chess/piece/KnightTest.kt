@@ -37,9 +37,9 @@ internal class KnightTest {
     @Test
     fun givenDestinationWhenJourneyThenReturnEmptyList() {
         val knight = Knight(Color.BLACK, Square(Column.D, Row.FOUR))
-        val pieceDestination = PieceDestination(knight, Square(Column.F, Row.FOUR))
-        val journey = emptyList<Square>()
+        val journey = Journey(Pair(knight.getPosition(), Square(Column.F, Row.FOUR)))
+        val squaresBetween = emptyList<Square>()
 
-        assertEquals(journey, knight.journey(pieceDestination))
+        assertEquals(squaresBetween, knight.journey(journey))
     }
 }

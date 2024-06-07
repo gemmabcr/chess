@@ -1,10 +1,7 @@
 package chess.piece
 
 import chess.Color
-import chess.square.Direction
-import chess.square.MainMovement
-import chess.square.MovementController
-import chess.square.Square
+import chess.square.*
 
 class Knight(
     color: Color,
@@ -55,5 +52,5 @@ class Knight(
         return mainMovement
     }
 
-    override fun journey(destination: PieceDestination): List<Square> = emptyList()
+    override fun journey(journey: Journey): List<Square> = emptyList()
 }

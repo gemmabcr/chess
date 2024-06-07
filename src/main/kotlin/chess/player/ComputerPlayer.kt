@@ -2,17 +2,16 @@ package chess.player
 
 import chess.Color
 import chess.piece.Piece
-import chess.piece.PieceDestination
+import chess.square.Journey
 import kotlin.random.Random
 
 class ComputerPlayer(
-    private val color: Color,
-    private val pieces: List<Piece>
+    color: Color,
 ) : Player(color) {
 
-    override fun pieceMovement(): PieceDestination {
+    override fun pieceMovement(pieces: List<Piece>): Journey {
         val index = Random.nextInt(0, pieces.size)
         val piece = pieces[index]
-        return PieceDestination(piece, piece.randomMove())
+        return Journey(Pair(piece.getPosition(), piece.randomMove()))
     }
 }

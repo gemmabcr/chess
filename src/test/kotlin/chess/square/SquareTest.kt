@@ -31,8 +31,8 @@ internal class SquareTest {
     @Test
     fun givenSquareWhenSquaresBetweenThenNumberOfSquaresBetween() {
         val square = Square(Column.D, Row.FOUR)
-        assertEquals(Journey(Pair(square, Square(Column.F, Row.TWO))).squaresBetween(), 1)
-        assertEquals(Journey(Pair(square, Square(Column.G, Row.FOUR))).squaresBetween(), 2)
-        assertEquals(Journey(Pair(square, Square(Column.D, Row.EIGHT))).squaresBetween(), 3)
+        assertEquals(Journey(Pair(square, Square(Column.F, Row.TWO))).squaresBetweenTotal(), 1)
+        assertEquals(Journey(Pair(square, Square(Column.G, Row.FOUR))).squaresBetweenTotal(), 2)
+        assertEquals(Journey(Pair(square, Square(Column.D, Row.EIGHT))).squaresBetweenTotal(), 3)
     }
 }

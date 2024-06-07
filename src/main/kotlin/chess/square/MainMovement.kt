@@ -17,9 +17,9 @@ data class MainMovement(
         }
     }
 
-    fun hasDestination(destination: Square): Boolean = allSquares().any { square -> square.`is`(destination) }
-
     fun isEmpty(): Boolean = allSquares().isEmpty()
 
     fun random(): Square = allSquares().random()
+
+    fun notContains(destination: Square): Boolean = !allSquares().any { square -> square.`is`(destination) }
 }

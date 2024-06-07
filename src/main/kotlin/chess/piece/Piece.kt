@@ -3,7 +3,6 @@ package chess.piece
 import chess.Color
 import chess.square.*
 import java.lang.Error
-import kotlin.math.abs
 
 abstract class Piece(
     private val color: Color,
@@ -29,20 +28,11 @@ abstract class Piece(
         return mainMovement
     }
 
-    open fun journey(destination: PieceDestination): List<Square> {
+    open fun journey(journey: Journey): List<Square> {
         if (maxMove == 1) {
             return emptyList()
         }
-        val movesList: MutableList<Square> = mutableListOf()
-        var index: Int = destination.squaresBetween()
-        if (index < 0) {
-            index = abs(index)
-        }
-        println(index)
-        for (i in 1..index) {
-            movesList.add(square.move(destination.direction(), i))
-        }
-        return movesList.toList()
+        return journey.squaresBetween()
     }
 
     fun move(destination: Square) {
@@ -54,10 +44,7 @@ abstract class Piece(
     fun `is`(color: Color): Boolean = this.color == color
     fun `is`(square: Square): Boolean = this.square == square
 
-    fun getColor(): Color = this.color
     fun getPosition(): Square = this.square
-
-    fun isValid(destination: Square): Boolean = mainMove().hasDestination(destination)
 
     fun randomMove(): Square {
         val moves = mainMove()
@@ -66,4 +53,8 @@ abstract class Piece(
         }
         return moves.random()
     }
+
+    fun hasSameColor(piece: Piece): Boolean = color == piece.color
+
+    fun enemyColor(): Color = color.opposite()
 }

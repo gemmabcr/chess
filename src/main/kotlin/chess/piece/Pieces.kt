@@ -2,6 +2,7 @@ package chess.piece
 
 import chess.Color
 import chess.ChessResult
+import chess.square.Journey
 import chess.square.Square
 
 class Pieces {
@@ -11,19 +12,17 @@ class Pieces {
 
     fun color(color: Color): List<Piece> = getTeamPieces(color)
 
-    fun isValid(movement: PieceDestination): Boolean {
-        val correctMove = movement.piece.isValid(movement.destination)
-        if (!correctMove) {
+    fun isValid(journey: Journey): Boolean {
+        val piece: Piece = allPieces().first { it.getPosition().`is`(journey.origin()) }
+        if (piece.mainMove().notContains(journey.destination())) {
             return false
         }
-        val journey = movement.piece.journey(movement)
-        if (journey.find { square -> isPlenty(square) } != null) {
+        if (journey.squaresBetween().any { square -> isPlenty(square) }) {
             return false
         }
-        val destinationHasPiece = this.allPieces().find { piece: Piece -> piece.`is`(movement.destination) }
-        if (destinationHasPiece != null) return when {
-            destinationHasPiece.`is`(movement.piece.getColor()) -> false
-            else -> true
+        val destinationHasPiece = allPieces().find { it.getPosition().`is`(journey.destination()) }
+        if (destinationHasPiece != null) {
+            return !destinationHasPiece.hasSameColor(piece)
         }
         return true
     }
@@ -64,18 +63,15 @@ class Pieces {
         return ChessResult.CHECKMATE
     }
 
-    fun checkRemoveEnemy(movement: PieceDestination) {
-        val destinationHasPiece = this.allPieces().find { piece: Piece -> piece.`is`(movement.destination) }
-        if (destinationHasPiece != null && !(destinationHasPiece.`is`(movement.piece.getColor()))) {
-            this.remove(destinationHasPiece)
+    fun maybeRemoveEnemy(destination: Square, enemyColor: Color) {
+        val maybePiece = this.allPieces().find { piece: Piece -> piece.`is`(destination) }
+        if (maybePiece != null) {
+            assert(maybePiece.`is`(enemyColor))
+            remove(maybePiece, enemyColor)
         }
     }
 
-    private fun remove(piece: Piece) {
-        pieces[piece.getColor()]!!.remove(piece)
-    }
-
-    fun move(movement: PieceDestination) {
-        allPieces().find { piece -> piece.`is`(movement.piece.getPosition()) }!!.move(movement.destination)
+    private fun remove(piece: Piece, enemyColor: Color) {
+        pieces[enemyColor]!!.remove(piece)
     }
 }

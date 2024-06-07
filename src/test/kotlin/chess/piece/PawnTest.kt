@@ -35,9 +35,9 @@ internal class PawnTest {
     @Test
     fun givenDestinationWhenJourneyThenReturnEmptyList() {
         val pawn = Pawn(Color.BLACK, Square(Column.D, Row.FOUR))
-        val pieceDestination = PieceDestination(pawn, Square(Column.D, Row.SIX))
-        val journey = emptyList<Square>()
+        val journey = Journey(Pair(pawn.getPosition(), Square(Column.D, Row.SIX)))
+        val squaresBetween = emptyList<Square>()
 
-        assertEquals(journey, pawn.journey(pieceDestination))
+        assertEquals(squaresBetween, pawn.journey(journey))
     }
 }

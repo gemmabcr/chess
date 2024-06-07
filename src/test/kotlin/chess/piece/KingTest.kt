@@ -35,16 +35,15 @@ internal class KingTest {
                 Pair(Direction.BACKWARD_RIGHT, mutableListOf(Square(Column.E, Row.THREE))),
             ),
         )
-
         assertEquals(mainMovement, king.mainMove())
     }
 
     @Test
     fun givenDestinationWhenJourneyThenReturnEmptyList() {
         val king = King(Color.BLACK, Square(Column.D, Row.FOUR))
-        val pieceDestination = PieceDestination(king, Square(Column.E, Row.FOUR))
-        val journey = emptyList<Square>()
+        val journey = Journey(Pair(king.getPosition(), Square(Column.E, Row.FOUR)))
+        val squaresBetween = emptyList<Square>()
 
-        assertEquals(journey, king.journey(pieceDestination))
+        assertEquals(squaresBetween, king.journey(journey))
     }
 }

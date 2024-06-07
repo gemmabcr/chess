@@ -1,16 +1,15 @@
 package chess
 
-import chess.piece.Pieces
 import chess.player.ComputerPlayer
 import chess.player.Player
 import chess.player.UserPlayer
 import chess.ui.Ui
 
-class Turn(ui: Ui, pieces: Pieces) {
+class Turn(ui: Ui) {
 
     private val players: List<Player> = listOf(
-        UserPlayer(Color.WHITE, pieces.color(Color.WHITE), ui),
-        ComputerPlayer(Color.BLACK, pieces.color(Color.BLACK))
+        UserPlayer(Color.WHITE, ui),
+        ComputerPlayer(Color.BLACK)
     )
     private var activePlayer = players[0]
     private var currentTurn: Int = 1

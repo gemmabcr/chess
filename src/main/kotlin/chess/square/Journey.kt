@@ -5,6 +5,10 @@ import kotlin.math.abs
 class Journey(
     private val journey: Pair<Square, Square>
 ) {
+    fun origin(): Square = journey.first
+
+    fun destination(): Square = journey.second
+
     fun direction(): Direction {
         val differenceCol = getDifferenceCol()
         val differenceRow = getDifferenceRow()
@@ -36,16 +40,26 @@ class Journey(
         return Direction.FORWARD_RIGHT
     }
 
-    private fun getDifferenceRow() = journey.second.getRow().ordinal - journey.first.getRow().ordinal
+    private fun getDifferenceRow() = destination().getRow().ordinal - origin().getRow().ordinal
 
-    private fun getDifferenceCol() = journey.second.getColumn().ordinal - journey.first.getColumn().ordinal
+    private fun getDifferenceCol() = destination().getColumn().ordinal - origin().getColumn().ordinal
 
-    fun squaresBetween(): Int {
+    fun squaresBetweenTotal(): Int {
         val direction: Direction = direction()
         return when (direction) {
             Direction.FORWARD -> abs(getDifferenceRow()) - 1
             Direction.BACKWARD -> abs(getDifferenceRow()) - 1
             else -> abs(getDifferenceCol()) - 1
         }
+    }
+
+    fun squaresBetween(): List<Square> {
+        val direction: Direction = direction()
+        val total: Int = squaresBetweenTotal()
+        val squares = mutableListOf<Square>()
+        for (i in 1..total) {
+            squares.add(origin().move(direction, i))
+        }
+        return squares
     }
 }

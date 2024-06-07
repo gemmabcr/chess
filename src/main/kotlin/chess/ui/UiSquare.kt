@@ -17,38 +17,21 @@ class UiSquare(
     }
 
     private fun getPieceIcon(piece: Piece): UiIcon {
-        when (piece) {
-            is King -> return when (Color.BLACK) {
-                piece.getColor() -> UiIcon.BLACK_KING
-                else -> UiIcon.WHITE_KING
-            }
-
-            is Queen -> return when (Color.BLACK) {
-                piece.getColor() -> UiIcon.BLACK_QUEEN
-                else -> UiIcon.WHITE_QUEEN
-            }
-
-            is Bishop -> return when (Color.BLACK) {
-                piece.getColor() -> UiIcon.BLACK_BISHOP
-                else -> UiIcon.WHITE_BISHOP
-            }
-
-            is Knight -> return when (Color.BLACK) {
-                piece.getColor() -> UiIcon.BLACK_KNIGHT
-                else -> UiIcon.WHITE_KNIGHT
-            }
-
-            is Rook -> return when (Color.BLACK) {
-                piece.getColor() -> UiIcon.BLACK_ROOK
-                else -> UiIcon.WHITE_ROOK
-            }
-
-            is Pawn -> return when (Color.BLACK) {
-                piece.getColor() -> UiIcon.BLACK_PAWN
-                else -> UiIcon.WHITE_PAWN
-            }
-
+        return when (piece) {
+            is King -> uiIcon(piece, UiIcon.WHITE_KING, UiIcon.BLACK_KING)
+            is Queen -> uiIcon(piece, UiIcon.WHITE_QUEEN, UiIcon.BLACK_QUEEN)
+            is Bishop -> uiIcon(piece, UiIcon.WHITE_BISHOP, UiIcon.BLACK_BISHOP)
+            is Knight -> uiIcon(piece, UiIcon.WHITE_KNIGHT, UiIcon.BLACK_KNIGHT)
+            is Rook -> uiIcon(piece, UiIcon.WHITE_ROOK, UiIcon.BLACK_ROOK)
+            is Pawn -> uiIcon(piece, UiIcon.WHITE_PAWN, UiIcon.BLACK_PAWN)
             else -> throw Error("Incorrect piece")
+        }
+    }
+
+    private fun uiIcon(piece: Piece, white: UiIcon, black: UiIcon): UiIcon {
+        return when (piece.`is`(Color.BLACK)) {
+            true -> black
+            false -> white
         }
     }
 }

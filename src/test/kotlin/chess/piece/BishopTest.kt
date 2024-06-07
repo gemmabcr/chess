@@ -70,7 +70,7 @@ internal class BishopTest {
     @Test
     fun givenDestinationWhenJourneyThenReturnAllSquaresInBetween() {
         val bishop = Bishop(Color.BLACK, Square(Column.G, Row.ONE))
-        val pieceDestination = PieceDestination(bishop, Square(Column.D, Row.FOUR))
+        val pieceDestination = Journey(Pair(bishop.getPosition(), Square(Column.D, Row.FOUR)))
         val journey = listOf(
             Square(Column.F, Row.TWO),
             Square(Column.E, Row.THREE),
@@ -82,12 +82,12 @@ internal class BishopTest {
     @Test
     fun givenDestination2WhenJourneyThenReturnAllSquaresInBetween() {
         val bishop = Bishop(Color.BLACK, Square(Column.D, Row.FOUR))
-        val pieceDestination = PieceDestination(bishop, Square(Column.G, Row.ONE))
-        val journey = listOf(
+        val journey = Journey(Pair(bishop.getPosition(), Square(Column.G, Row.ONE)))
+        val squaresBetween = listOf(
             Square(Column.E, Row.THREE),
             Square(Column.F, Row.TWO),
         )
 
-        assertEquals(journey, bishop.journey(pieceDestination))
+        assertEquals(squaresBetween, bishop.journey(journey))
     }
 }

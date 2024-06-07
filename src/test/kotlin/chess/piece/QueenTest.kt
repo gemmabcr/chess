@@ -122,8 +122,8 @@ internal class QueenTest {
     @Test
     fun givenDestinationWhenJourneyThenReturnAllSquaresInBetween() {
         val queen = Queen(Color.BLACK, Square(Column.G, Row.ONE))
-        val pieceDestination = PieceDestination(queen, Square(Column.A, Row.SEVEN))
-        val journey = listOf(
+        val journey = Journey(Pair(queen.getPosition(), Square(Column.A, Row.SEVEN)))
+        val squaresBetween = listOf(
             Square(Column.F, Row.TWO),
             Square(Column.E, Row.THREE),
             Square(Column.D, Row.FOUR),
@@ -131,6 +131,6 @@ internal class QueenTest {
             Square(Column.B, Row.SIX),
         )
 
-        assertEquals(journey, queen.journey(pieceDestination))
+        assertEquals(squaresBetween, queen.journey(journey))
     }
 }

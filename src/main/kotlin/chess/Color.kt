@@ -18,4 +18,11 @@ enum class Color {
         }
         return Row.SEVEN
     }
+
+    fun opposite(): Color {
+        return when (this) {
+            BLACK -> WHITE
+            WHITE -> BLACK
+        }
+    }
 }

@@ -38,8 +38,8 @@ internal class PiecesTest {
 
     @Test
     fun givenPieceDestinationWithNotInMainMovePieceWhenIsValidThenReturnFalse() {
-        val movement = PieceDestination(blackPieces.first { it is Pawn }, Square(Column.A, Row.FIVE))
-        assertFalse(pieces.isValid(movement))
+        val piece = blackPieces.first { it is Pawn }
+        assertFalse(pieces.isValid(Journey(Pair(piece.getPosition(), Square(Column.A, Row.FIVE)))))
     }
 
     private fun isInLastRow(position: Square) = position.getRow().`is`(Row.EIGHT)

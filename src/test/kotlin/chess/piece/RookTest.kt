@@ -82,14 +82,14 @@ internal class RookTest {
     @Test
     fun givenDestinationWhenJourneyThenReturnAllSquaresInBetween() {
         val queen = Queen(Color.BLACK, Square(Column.G, Row.ONE))
-        val pieceDestination = PieceDestination(queen, Square(Column.G, Row.SIX))
-        val journey = listOf(
+        val journey = Journey(Pair(queen.getPosition(), Square(Column.G, Row.SIX)))
+        val squaresBetween = listOf(
             Square(Column.G, Row.TWO),
             Square(Column.G, Row.THREE),
             Square(Column.G, Row.FOUR),
             Square(Column.G, Row.FIVE),
         )
 
-        assertEquals(journey, queen.journey(pieceDestination))
+        assertEquals(squaresBetween, queen.journey(journey))
     }
 }
