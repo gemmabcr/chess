@@ -8,22 +8,16 @@ class Movement(
         val mainMovement = MainMovement(mutableMapOf())
 
         for (direction in directions) {
-            squares(
-                direction,
-                maxMove ?: MaxMovement(direction, square).total()
-            ).forEach { square -> mainMovement.add(direction, square) }
+            val index = maxMove ?: MaxMovement(direction, square).total()
+            val possibleMoves: MutableList<Square> = mutableListOf()
+            if (square.canMove(direction)) {
+                for (i in 1..index) {
+                    possibleMoves.add(square.move(direction, i))
+                }
+            }
+            possibleMoves.forEach { square -> mainMovement.add(direction, square) }
         }
 
         return mainMovement
-    }
-
-    private fun squares(direction: Direction, maxMove: Int): List<Square> {
-        val possibleMoves: MutableList<Square> = mutableListOf()
-        if (square.canMove(direction)) {
-            for (i in 1..maxMove) {
-                possibleMoves.add(square.move(direction, i))
-            }
-        }
-        return possibleMoves
     }
 }
