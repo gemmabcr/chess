@@ -16,8 +16,7 @@ internal class PawnTest {
                 Pair(Direction.FORWARD_RIGHT, mutableListOf(Square(Column.B, Row.TWO))),
             )
         )
-        val result: MainMovement = pawn.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, pawn.mainMove())
     }
 
     @Test
@@ -30,8 +29,7 @@ internal class PawnTest {
                 Pair(Direction.FORWARD_LEFT, mutableListOf(Square(Column.C, Row.FIVE))),
             )
         )
-        val result: MainMovement = pawn.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, pawn.mainMove())
     }
 
     @Test

@@ -17,8 +17,7 @@ internal class KingTest {
                 Pair(Direction.FORWARD, mutableListOf(Square(Column.A, Row.TWO)))
             ),
         )
-        val result: MainMovement = king.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, king.mainMove())
     }
 
     @Test
@@ -37,8 +36,7 @@ internal class KingTest {
             ),
         )
 
-        val result: MainMovement = king.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, king.mainMove())
     }
 
     @Test

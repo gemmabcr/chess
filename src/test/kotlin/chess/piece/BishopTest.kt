@@ -25,8 +25,7 @@ internal class BishopTest {
                 )
             )
         )
-        val result: MainMovement = bishop.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, bishop.mainMove())
     }
 
     @Test
@@ -65,8 +64,7 @@ internal class BishopTest {
                 )
             )
         )
-        val result: MainMovement = bishop.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, bishop.mainMove())
     }
 
     @Test

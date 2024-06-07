@@ -47,8 +47,7 @@ internal class QueenTest {
                 ),
             )
         )
-        val result: MainMovement = queen.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, queen.mainMove())
     }
 
     @Test
@@ -117,8 +116,7 @@ internal class QueenTest {
                 ),
             )
         )
-        val result: MainMovement = queen.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, queen.mainMove())
     }
 
     @Test

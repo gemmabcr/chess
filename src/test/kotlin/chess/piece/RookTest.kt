@@ -36,8 +36,7 @@ internal class RookTest {
                 )
             )
         )
-        val result: MainMovement = rook.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, rook.mainMove())
     }
 
     @Test
@@ -77,8 +76,7 @@ internal class RookTest {
                 ),
             )
         )
-        val result: MainMovement = rook.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, rook.mainMove())
     }
 
     @Test

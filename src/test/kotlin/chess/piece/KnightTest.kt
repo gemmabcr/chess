@@ -17,8 +17,7 @@ internal class KnightTest {
                 )
             ),
         )
-        val result: MainMovement = knight.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, knight.mainMove())
     }
 
     @Test
@@ -32,8 +31,7 @@ internal class KnightTest {
                 Pair(Direction.BACKWARD_RIGHT, mutableListOf(Square(Column.E, Row.TWO), Square(Column.F, Row.THREE)))
             )
         )
-        val result: MainMovement = knight.mainMove()
-        assertEquals(mainMovement, result)
+        assertEquals(mainMovement, knight.mainMove())
     }
 
     @Test
