@@ -15,6 +15,8 @@ enum class Column {
 
     fun move(columnMove: Int): Column = entries[this.ordinal + columnMove]
 
+    fun isPair(): Boolean = ordinal % 2 != 0
+
     companion object {
         fun all() = entries
     }

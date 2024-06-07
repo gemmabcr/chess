@@ -24,9 +24,9 @@ data class Square(
         else -> Color.WHITE
     }
 
-    private fun columnIsPair(): Boolean = column.ordinal % 2 != 0
+    private fun columnIsPair(): Boolean = column.isPair()
 
-    private fun rowIsPair(): Boolean = row.ordinal % 2 != 0
+    private fun rowIsPair(): Boolean = row.isPair()
 
     fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
 
