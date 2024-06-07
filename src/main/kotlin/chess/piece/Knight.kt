@@ -6,10 +6,8 @@ import chess.square.Square
 
 class Knight(
     color: Color,
-    private val square: Square
-) : Piece(color, square) {
-    override fun directions(): List<Direction> = Direction.diagonals()
-
+    square: Square
+) : Piece(color, square, Direction.diagonals()) {
     override fun mainMove(): MainMovement {
         val mainMovement = MainMovement(mutableMapOf())
 
@@ -54,5 +52,5 @@ class Knight(
         return mainMovement
     }
 
-    override fun journey(destination: Square): List<Square> = emptyList()
+    override fun journey(destination: PieceDestination): List<Square> = emptyList()
 }

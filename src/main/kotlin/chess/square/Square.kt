@@ -80,11 +80,51 @@ data class Square(
         else -> firstValue
     }
 
-    fun differenceColRow(destination: Square): Pair<Int, Int> =
-        Pair(destination.column.ordinal - column.ordinal, destination.row.ordinal - row.ordinal)
-
-
     override fun toString(): String {
         return "${this.column}-${this.row.ordinal + 1}"
+    }
+
+    fun direction(destination: Square): Direction {
+        val differenceCol = getDifferenceCol(destination)
+        val differenceRow = getDifferenceRow(destination)
+
+        if (differenceCol == 0) {
+            if (differenceRow == 1) {
+                return Direction.FORWARD
+            }
+            return Direction.BACKWARD
+        }
+
+        if (differenceRow == 0) {
+            if (differenceCol == 1) {
+                return Direction.RIGHT
+            }
+            return Direction.LEFT
+        }
+
+        if (differenceRow < 0) {
+            if (differenceCol < 0) {
+                return Direction.BACKWARD_LEFT
+            }
+            return Direction.BACKWARD_RIGHT
+        }
+
+        if (differenceCol < 0) {
+            return Direction.FORWARD_LEFT
+        }
+        return Direction.FORWARD_RIGHT
+    }
+
+    private fun getDifferenceRow(destination: Square) = destination.row.ordinal - row.ordinal
+
+    private fun getDifferenceCol(destination: Square) = destination.column.ordinal - column.ordinal
+
+    fun squaresBetween(destination: Square): Int {
+        val direction: Direction = direction(destination)
+        return when (direction) {
+            Direction.FORWARD -> getDifferenceRow(destination)
+            Direction.BACKWARD -> getDifferenceRow(destination)
+            else -> getDifferenceCol(destination)
+        }
     }
 }

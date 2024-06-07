@@ -6,11 +6,7 @@ import chess.square.Square
 
 class King(
     color: Color,
-    val square: Square
-) : Piece(color, square, 1) {
-    override fun directions(): List<Direction> = Direction.all()
-
-    override fun journey(destination: Square): List<Square> = emptyList()
-
+    square: Square
+) : Piece(color, square, Direction.all(), 1) {
     override fun isKing(): Boolean = true
 }

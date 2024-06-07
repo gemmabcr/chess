@@ -16,7 +16,7 @@ class Pieces {
         if (!correctMove) {
             return false
         }
-        val journey = movement.piece.journey(movement.destination)
+        val journey = movement.piece.journey(movement)
         if (journey.find { square -> isPlenty(square) } != null) {
             return false
         }
@@ -76,6 +76,6 @@ class Pieces {
     }
 
     fun move(movement: PieceDestination) {
-        allPieces().find { piece -> piece.`is`(movement.origin) }!!.move(movement.destination)
+        allPieces().find { piece -> piece.`is`(movement.piece.getPosition()) }!!.move(movement.destination)
     }
 }

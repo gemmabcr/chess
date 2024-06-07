@@ -10,10 +10,10 @@ class UserPlayer(
     color: Color,
     private val pieces: List<Piece>,
     private val ui: Ui
-): Player(color) {
+) : Player(color) {
     override fun pieceMovement(): PieceDestination {
         val piece: Piece = ui.askPiece(pieces)
         val square: Square = ui.askSquare(piece.mainMove().allSquares())
-        return PieceDestination(piece, piece.getPosition(), square)
+        return PieceDestination(piece, square)
     }
 }

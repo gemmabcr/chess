@@ -4,19 +4,28 @@ import chess.Color
 import chess.square.Direction
 import chess.square.Square
 import java.lang.Error
+import kotlin.math.abs
 
 abstract class Piece(
     private val color: Color,
-    private var square: Square,
+    protected var square: Square,
+    private val directions: List<Direction>,
     private val maxMove: Int? = null
 ) {
-    private val movement: Movement = Movement(square, this.directions())
-
-    abstract fun directions(): List<Direction>
+    private val movement: Movement = Movement(square, directions)
 
     open fun mainMove(): MainMovement = movement.possibleMoves(maxMove)
 
-    abstract fun journey(destination: Square): List<Square>
+    open fun journey(destination: PieceDestination): List<Square> {
+        if (maxMove == 1) {
+            return emptyList()
+        }
+        val movesList: MutableList<Square> = mutableListOf()
+        for (i in 1..<abs(destination.squaresBetween())) {
+            movesList.add(square.move(destination.direction(), i))
+        }
+        return movesList.toList()
+    }
 
     fun move(destination: Square) {
         this.square = destination
