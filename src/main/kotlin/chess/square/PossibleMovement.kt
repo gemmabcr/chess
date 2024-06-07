@@ -1,10 +1,10 @@
 package chess.square
 
-class Movement(
+class PossibleMovement(
     private val square: Square,
     private val directions: List<Direction>
 ) {
-    fun possibleMoves(maxMove: Int? = null): MainMovement {
+    fun toMainMovement(maxMove: Int? = null): MainMovement {
         val mainMovement = MainMovement(mutableMapOf())
 
         for (direction in directions) {

@@ -3,11 +3,11 @@ package chess.square
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class MovementTest {
+internal class PossibleMovementTest {
 
     @Test
-    fun givenMovementWithCornerSquareAndDiagonalsWhenPossibleMovesThenReturnOnlyOneDiagonal() {
-        val movement = Movement(Square(Column.A, Row.ONE), Direction.diagonals())
+    fun givenMovementWithCornerSquareAndDiagonalsWhenToMainMovementThenReturnOnlyOneDiagonal() {
+        val possibleMovement = PossibleMovement(Square(Column.A, Row.ONE), Direction.diagonals())
         val mainMovement = MainMovement(
             moves = mutableMapOf(
                 Pair(
@@ -23,13 +23,13 @@ internal class MovementTest {
                 )
             )
         )
-        val result: MainMovement = movement.possibleMoves()
+        val result: MainMovement = possibleMovement.toMainMovement()
         assertEquals(mainMovement, result)
     }
 
     @Test
-    fun givenMovementWithFirstRowSquareAndDiagonalsWhenPossibleMovesThenReturnOnlyTwoDiagonals() {
-        val movement = Movement(Square(Column.E, Row.ONE), Direction.diagonals())
+    fun givenMovementWithFirstRowSquareAndDiagonalsWhenToMainMovementThenReturnOnlyTwoDiagonals() {
+        val possibleMovement = PossibleMovement(Square(Column.E, Row.ONE), Direction.diagonals())
         val mainMovement = MainMovement(
             moves = mutableMapOf(
                 Pair(
@@ -49,13 +49,13 @@ internal class MovementTest {
                 )
             )
         )
-        val result: MainMovement = movement.possibleMoves()
+        val result: MainMovement = possibleMovement.toMainMovement()
         assertEquals(mainMovement, result)
     }
 
     @Test
-    fun givenMovementWithCenteredAndDiagonalsSquareWhenPossibleMovesThenReturnFourDiagonals() {
-        val movement = Movement(Square(Column.E, Row.FOUR), Direction.diagonals())
+    fun givenMovementWithCenteredAndDiagonalsSquareWhenToMainMovementThenReturnFourDiagonals() {
+        val possibleMovement = PossibleMovement(Square(Column.E, Row.FOUR), Direction.diagonals())
         val mainMovement = MainMovement(
             moves = mutableMapOf(
                 Pair(
@@ -89,13 +89,13 @@ internal class MovementTest {
                 )
             )
         )
-        val result: MainMovement = movement.possibleMoves()
+        val result: MainMovement = possibleMovement.toMainMovement()
         assertEquals(mainMovement, result)
     }
 
     @Test
-    fun givenMovementWithCornerSquareAndStraightsWhenPossibleMovesThenReturnOnlyTwoStraights() {
-        val movement = Movement(Square(Column.A, Row.ONE), Direction.straights())
+    fun givenMovementWithCornerSquareAndStraightsWhenToMainMovementThenReturnOnlyTwoStraights() {
+        val possibleMovement = PossibleMovement(Square(Column.A, Row.ONE), Direction.straights())
         val mainMovement = MainMovement(
             moves = mutableMapOf(
                 Pair(
@@ -122,13 +122,13 @@ internal class MovementTest {
                 )
             )
         )
-        val result: MainMovement = movement.possibleMoves()
+        val result: MainMovement = possibleMovement.toMainMovement()
         assertEquals(mainMovement, result)
     }
 
     @Test
-    fun givenMovementWithFirstRowSquareAndStraightsWhenPossibleMovesThenReturnOnlyThreeStraights() {
-        val movement = Movement(Square(Column.E, Row.ONE), Direction.straights())
+    fun givenMovementWithFirstRowSquareAndStraightsWhenToMainMovementThenReturnOnlyThreeStraights() {
+        val possibleMovement = PossibleMovement(Square(Column.E, Row.ONE), Direction.straights())
         val mainMovement = MainMovement(
             moves = mutableMapOf(
                 Pair(
@@ -159,13 +159,13 @@ internal class MovementTest {
                 )
             )
         )
-        val result: MainMovement = movement.possibleMoves()
+        val result: MainMovement = possibleMovement.toMainMovement()
         assertEquals(mainMovement, result)
     }
 
     @Test
-    fun givenMovementWithCenteredSquareAndStraightsWhenPossibleMovesThenReturnAllStraights() {
-        val movement = Movement(Square(Column.E, Row.FOUR), Direction.straights())
+    fun givenMovementWithCenteredSquareAndStraightsWhenToMainMovementThenReturnAllStraights() {
+        val possibleMovement = PossibleMovement(Square(Column.E, Row.FOUR), Direction.straights())
         val mainMovement = MainMovement(
             moves = mutableMapOf(
                 Pair(
@@ -200,7 +200,7 @@ internal class MovementTest {
                 )
             )
         )
-        val result: MainMovement = movement.possibleMoves()
+        val result: MainMovement = possibleMovement.toMainMovement()
         assertEquals(mainMovement, result)
     }
 }

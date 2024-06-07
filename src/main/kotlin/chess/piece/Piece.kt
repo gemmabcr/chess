@@ -3,7 +3,7 @@ package chess.piece
 import chess.Color
 import chess.square.Direction
 import chess.square.MainMovement
-import chess.square.Movement
+import chess.square.PossibleMovement
 import chess.square.Square
 import java.lang.Error
 import kotlin.math.abs
@@ -11,12 +11,10 @@ import kotlin.math.abs
 abstract class Piece(
     private val color: Color,
     protected var square: Square,
-    directions: List<Direction>,
+    private val directions: List<Direction>,
     private val maxMove: Int? = null
 ) {
-    private val movement: Movement = Movement(square, directions)
-
-    open fun mainMove(): MainMovement = movement.possibleMoves(maxMove)
+    open fun mainMove(): MainMovement = PossibleMovement(square, directions).toMainMovement(maxMove)
 
     open fun journey(destination: PieceDestination): List<Square> {
         if (maxMove == 1) {

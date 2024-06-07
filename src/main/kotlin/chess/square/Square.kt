@@ -1,7 +1,6 @@
 package chess.square
 
 import chess.Color
-import kotlin.math.abs
 
 data class Square(
     private val column: Column,
@@ -62,49 +61,5 @@ data class Square(
 
     override fun toString(): String {
         return "${this.column}-${this.row.ordinal + 1}"
-    }
-
-    fun direction(destination: Square): Direction {
-        val differenceCol = getDifferenceCol(destination)
-        val differenceRow = getDifferenceRow(destination)
-
-        if (differenceCol == 0) {
-            if (differenceRow > 0) {
-                return Direction.FORWARD
-            }
-            return Direction.BACKWARD
-        }
-
-        if (differenceRow == 0) {
-            if (differenceCol > 0) {
-                return Direction.RIGHT
-            }
-            return Direction.LEFT
-        }
-
-        if (differenceRow < 0) {
-            if (differenceCol < 0) {
-                return Direction.BACKWARD_LEFT
-            }
-            return Direction.BACKWARD_RIGHT
-        }
-
-        if (differenceCol < 0) {
-            return Direction.FORWARD_LEFT
-        }
-        return Direction.FORWARD_RIGHT
-    }
-
-    private fun getDifferenceRow(destination: Square) = destination.row.ordinal - row.ordinal
-
-    private fun getDifferenceCol(destination: Square) = destination.column.ordinal - column.ordinal
-
-    fun squaresBetween(destination: Square): Int {
-        val direction: Direction = direction(destination)
-        return when (direction) {
-            Direction.FORWARD -> abs(getDifferenceRow(destination)) - 1
-            Direction.BACKWARD -> abs(getDifferenceRow(destination)) - 1
-            else -> abs(getDifferenceCol(destination)) - 1
-        }
     }
 }
