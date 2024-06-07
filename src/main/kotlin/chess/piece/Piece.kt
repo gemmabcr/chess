@@ -15,9 +15,10 @@ abstract class Piece(
         val mainMovement = MainMovement(mutableMapOf())
 
         for (direction in directions) {
-            val index = maxMove ?: MaxMovement(direction, square).total()
+            val controller = MovementController(direction, square)
+            val index = maxMove ?: controller.maxMovement()
             val possibleMoves: MutableList<Square> = mutableListOf()
-            if (square.canMove(direction)) {
+            if (controller.canMove()) {
                 for (i in 1..index) {
                     possibleMoves.add(square.move(direction, i))
                 }

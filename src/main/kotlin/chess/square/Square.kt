@@ -30,23 +30,6 @@ data class Square(
 
     fun move(horizontal: Int, vertical: Int): Square = Square(column.move(horizontal), row.move(vertical))
 
-    fun canMove(direction: Direction): Boolean = when {
-        direction `is` Direction.FORWARD -> canMoveForward()
-        direction `is` Direction.LEFT -> canMoveLeft()
-        direction `is` Direction.BACKWARD -> canMoveBackward()
-        direction `is` Direction.RIGHT -> canMoveRight()
-        direction `is` Direction.FORWARD_LEFT -> canMoveForward() && canMoveLeft()
-        direction `is` Direction.BACKWARD_LEFT -> canMoveBackward() && canMoveLeft()
-        direction `is` Direction.BACKWARD_RIGHT -> canMoveBackward() && canMoveRight()
-        direction `is` Direction.FORWARD_RIGHT -> canMoveForward() && canMoveRight()
-        else -> false
-    }
-
-    private fun canMoveForward(): Boolean = row.canMoveForward()
-    private fun canMoveRight(): Boolean = column.canMoveRight()
-    private fun canMoveBackward(): Boolean = row.canMoveBackward()
-    private fun canMoveLeft(): Boolean = column.canMoveLeft()
-
     fun move(direction: Direction, index: Int): Square = when {
         direction `is` Direction.FORWARD -> Square(column, row.move(index))
         direction `is` Direction.LEFT -> Square(column.move(-index), row)
