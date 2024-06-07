@@ -1,10 +1,7 @@
 package chess.piece
 
 import chess.Color
-import chess.square.Direction
-import chess.square.MainMovement
-import chess.square.PossibleMovement
-import chess.square.Square
+import chess.square.*
 import java.lang.Error
 import kotlin.math.abs
 
@@ -14,7 +11,22 @@ abstract class Piece(
     private val directions: List<Direction>,
     private val maxMove: Int? = null
 ) {
-    open fun mainMove(): MainMovement = PossibleMovement(square, directions).toMainMovement(maxMove)
+    open fun mainMove(): MainMovement {
+        val mainMovement = MainMovement(mutableMapOf())
+
+        for (direction in directions) {
+            val index = maxMove ?: MaxMovement(direction, square).total()
+            val possibleMoves: MutableList<Square> = mutableListOf()
+            if (square.canMove(direction)) {
+                for (i in 1..index) {
+                    possibleMoves.add(square.move(direction, i))
+                }
+            }
+            possibleMoves.forEach { square -> mainMovement.add(direction, square) }
+        }
+
+        return mainMovement
+    }
 
     open fun journey(destination: PieceDestination): List<Square> {
         if (maxMove == 1) {
