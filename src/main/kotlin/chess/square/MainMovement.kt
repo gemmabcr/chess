@@ -1,16 +1,13 @@
-package chess.piece
-
-import chess.square.Direction
-import chess.square.Square
+package chess.square
 
 data class MainMovement(
     private val moves: MutableMap<Direction, MutableList<Square>>,
 ) {
-    fun allSquares(): List<Square> = moves.values.flatMap { it }.toList()
+    fun allSquares(): List<Square> = moves.values.flatten().toList()
 
-    fun add(direction:Direction, square: Square) {
+    fun add(direction: Direction, square: Square) {
         if (!moves.containsKey(direction)) {
-            moves.put(direction, mutableListOf())
+            moves[direction] = mutableListOf()
         }
         moves[direction]!!.add(square)
         if (direction `is` Direction.FORWARD || direction `is` Direction.BACKWARD) {

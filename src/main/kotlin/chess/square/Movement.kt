@@ -1,7 +1,4 @@
-package chess.piece
-
-import chess.square.Square
-import chess.square.Direction
+package chess.square
 
 class Movement(
     private val square: Square,
@@ -10,7 +7,7 @@ class Movement(
     fun possibleMoves(maxMove: Int? = null): MainMovement {
         val mainMovement = MainMovement(mutableMapOf())
 
-        for(direction in directions) {
+        for (direction in directions) {
             squares(
                 direction,
                 maxMove ?: maxMovement(direction)
@@ -35,7 +32,7 @@ class Movement(
     private fun squares(direction: Direction, maxMove: Int): List<Square> {
         val possibleMoves: MutableList<Square> = mutableListOf()
         if (square.canMove(direction)) {
-            for (i in 1 ..maxMove) {
+            for (i in 1..maxMove) {
                 possibleMoves.add(square.move(direction, i))
             }
         }

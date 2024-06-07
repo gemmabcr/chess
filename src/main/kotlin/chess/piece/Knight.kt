@@ -2,6 +2,7 @@ package chess.piece
 
 import chess.Color
 import chess.square.Direction
+import chess.square.MainMovement
 import chess.square.Square
 
 class Knight(

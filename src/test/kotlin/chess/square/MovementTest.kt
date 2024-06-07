@@ -1,9 +1,5 @@
-package chess.piece
+package chess.square
 
-import chess.square.Column
-import chess.square.Direction
-import chess.square.Row
-import chess.square.Square
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -188,7 +184,7 @@ internal class MovementTest {
                     )
                 ),
                 Pair(
-                    Direction.LEFT,mutableListOf(
+                    Direction.LEFT, mutableListOf(
                         Square(Column.A, Row.FOUR),
                         Square(Column.B, Row.FOUR),
                         Square(Column.C, Row.FOUR),

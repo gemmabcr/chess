@@ -2,6 +2,8 @@ package chess.piece
 
 import chess.Color
 import chess.square.Direction
+import chess.square.MainMovement
+import chess.square.Movement
 import chess.square.Square
 import java.lang.Error
 import kotlin.math.abs
@@ -9,7 +11,7 @@ import kotlin.math.abs
 abstract class Piece(
     private val color: Color,
     protected var square: Square,
-    private val directions: List<Direction>,
+    directions: List<Direction>,
     private val maxMove: Int? = null
 ) {
     private val movement: Movement = Movement(square, directions)
@@ -21,12 +23,12 @@ abstract class Piece(
             return emptyList()
         }
         val movesList: MutableList<Square> = mutableListOf()
-        var index: Int = destination.squaresBetween();
+        var index: Int = destination.squaresBetween()
         if (index < 0) {
             index = abs(index)
         }
         println(index)
-        for (i in 1.. index) {
+        for (i in 1..index) {
             movesList.add(square.move(destination.direction(), i))
         }
         return movesList.toList()

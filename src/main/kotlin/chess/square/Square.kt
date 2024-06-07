@@ -60,26 +60,7 @@ data class Square(
         else -> throw Exception("Can't move diagonal with $direction")
     }
 
-    fun maxMove(direction: Direction): Int = when {
-        direction `is` Direction.FORWARD -> maxForwardMovement()
-        direction `is` Direction.LEFT -> maxLeftMovement()
-        direction `is` Direction.BACKWARD -> maxBackwardMovement()
-        direction `is` Direction.RIGHT -> maxRightMovement()
-        direction `is` Direction.FORWARD_LEFT -> lowerValue(maxForwardMovement(), maxLeftMovement())
-        direction `is` Direction.BACKWARD_LEFT -> lowerValue(maxBackwardMovement(), maxLeftMovement())
-        direction `is` Direction.BACKWARD_RIGHT -> lowerValue(maxBackwardMovement(), maxRightMovement())
-        direction `is` Direction.FORWARD_RIGHT -> lowerValue(maxForwardMovement(), maxRightMovement())
-        else -> throw Exception("Can't move diagonal with $direction")
-    }
-
-    private fun maxForwardMovement(): Int = row.maxForwardMovement()
-    private fun maxRightMovement(): Int = column.maxRightMovement()
-    private fun maxBackwardMovement(): Int = row.maxBackwardMovement()
-    private fun maxLeftMovement(): Int = column.maxLeftMovement()
-    private fun lowerValue(firstValue: Int, lastValue: Int) = when {
-        firstValue > lastValue -> lastValue
-        else -> firstValue
-    }
+    fun maxMove(direction: Direction): Int = MaxMovement(direction, Square(column, row)).total()
 
     override fun toString(): String {
         return "${this.column}-${this.row.ordinal + 1}"
@@ -123,9 +104,9 @@ data class Square(
     fun squaresBetween(destination: Square): Int {
         val direction: Direction = direction(destination)
         return when (direction) {
-            Direction.FORWARD -> abs(getDifferenceRow(destination)) -1
-            Direction.BACKWARD -> abs(getDifferenceRow(destination))-1
-            else -> abs(getDifferenceCol(destination))-1
+            Direction.FORWARD -> abs(getDifferenceRow(destination)) - 1
+            Direction.BACKWARD -> abs(getDifferenceRow(destination)) - 1
+            else -> abs(getDifferenceCol(destination)) - 1
         }
     }
 }

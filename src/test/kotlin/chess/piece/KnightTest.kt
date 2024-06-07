@@ -1,10 +1,7 @@
 package chess.piece
 
 import chess.Color
-import chess.square.Column
-import chess.square.Direction
-import chess.square.Row
-import chess.square.Square
+import chess.square.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
