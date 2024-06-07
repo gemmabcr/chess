@@ -12,6 +12,6 @@ class ComputerPlayer(
     override fun pieceMovement(pieces: List<Piece>): Journey {
         val index = Random.nextInt(0, pieces.size)
         val piece = pieces[index]
-        return Journey(Pair(piece.getPosition(), piece.randomMove()))
+        return piece.getRandomJourney()
     }
 }

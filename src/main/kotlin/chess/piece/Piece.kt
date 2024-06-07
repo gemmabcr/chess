@@ -42,11 +42,20 @@ abstract class Piece(
     open fun isKing(): Boolean = false
 
     fun `is`(color: Color): Boolean = this.color == color
+
     fun `is`(square: Square): Boolean = this.square == square
 
     fun getPosition(): Square = this.square
 
-    fun randomMove(): Square {
+    fun hasSameColor(piece: Piece): Boolean = color == piece.color
+
+    fun enemyColor(): Color = color.opposite()
+
+    fun hasPosition(origin: Square): Boolean = square.`is`(origin)
+
+    fun getRandomJourney(): Journey = Journey(Pair(square, randomMove()))
+
+    private fun randomMove(): Square {
         val moves = mainMove()
         if (moves.isEmpty()) {
             throw Error("This piece can not be moved")
@@ -54,7 +63,11 @@ abstract class Piece(
         return moves.random()
     }
 
-    fun hasSameColor(piece: Piece): Boolean = color == piece.color
+    fun getJourney(square: Square): Journey {
+        return Journey(Pair(getPosition(), square))
+    }
 
-    fun enemyColor(): Color = color.opposite()
+    fun allPossibleMoves(): List<Square> = mainMove().allSquares()
+
+    fun canMove(): Boolean = allPossibleMoves().isNotEmpty()
 }

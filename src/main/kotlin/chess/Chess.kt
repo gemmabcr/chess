@@ -43,10 +43,10 @@ class Chess {
 
     private fun validMove(player: Player) {
         do {
-            val journey: Journey = player.pieceMovement(pieces.color(player.getColor()))
+            val journey: Journey = player.pieceMovement(pieces.onlyCanMove(player.getColor()))
             val validMove: Boolean = pieces.isValid(journey)
             if (validMove) {
-                val piece: Piece = pieces.allPieces().first { it.getPosition().`is`(journey.origin()) }
+                val piece: Piece = pieces.allPieces().first { it.hasPosition(journey.origin()) }
                 pieces.maybeRemoveEnemy(journey.destination(), piece.enemyColor())
                 piece.move(journey.destination())
             } else {

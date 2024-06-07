@@ -12,9 +12,9 @@ class Ui {
     fun askPiece(pieces: List<Piece>): Piece {
         print("Write the number of the piece you want to move:")
         println()
-        pieces.forEachIndexed { index, piece -> println("${index}-> ${getPieceName(piece)}. ${piece.getPosition().toString()} ") }
+        pieces.forEachIndexed { index, piece -> println("${index}-> ${getPieceName(piece)}. ${piece.getPosition()} ") }
         val piece = pieces[readln().toInt()]
-        println("You are moving ${getPieceName(piece)}. ${piece.getPosition().toString()}")
+        println("You are moving ${getPieceName(piece)}. ${piece.getPosition()}")
         return piece
     }
 
@@ -31,9 +31,9 @@ class Ui {
     fun askSquare(mainMove: List<Square>): Square {
         print("Write the number of the square you want to move:")
         println()
-        mainMove.forEachIndexed { index, move -> println("${index}-> ${move.toString()} ") }
+        mainMove.forEachIndexed { index, move -> println("${index}-> $move ") }
         val square = mainMove[readln().toInt()]
-        println("You are moving to ${square.toString()}")
+        println("You are moving to $square")
         return square
     }
 

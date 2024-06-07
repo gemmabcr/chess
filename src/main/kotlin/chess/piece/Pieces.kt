@@ -13,14 +13,14 @@ class Pieces {
     fun color(color: Color): List<Piece> = getTeamPieces(color)
 
     fun isValid(journey: Journey): Boolean {
-        val piece: Piece = allPieces().first { it.getPosition().`is`(journey.origin()) }
+        val piece: Piece = allPieces().first { it.hasPosition(journey.origin()) }
         if (piece.mainMove().notContains(journey.destination())) {
             return false
         }
         if (journey.squaresBetween().any { square -> isPlenty(square) }) {
             return false
         }
-        val destinationHasPiece = allPieces().find { it.getPosition().`is`(journey.destination()) }
+        val destinationHasPiece = allPieces().find { it.hasPosition(journey.destination()) }
         if (destinationHasPiece != null) {
             return !destinationHasPiece.hasSameColor(piece)
         }
@@ -36,10 +36,10 @@ class Pieces {
     private fun isCheckBy(kingColor: Color): Boolean {
         val teamPieces = getTeamPieces(kingColor)
         val enemiesPieces = getEnemiesPieces(kingColor)
-        val kingPosition = teamPieces.find { it.isKing() }!!.getPosition()
+        val king = teamPieces.find { it.isKing() }!!
         val enemiesMovements: List<Square> =
             enemiesPieces.filter { it.isKing().not() }.flatMap { it.mainMove().allSquares() }
-        return enemiesMovements.find { movement -> movement.`is`(kingPosition) } != null
+        return enemiesMovements.find { king.hasPosition(it) } != null
     }
 
     private fun getEnemiesPieces(kingColor: Color) =
@@ -73,5 +73,10 @@ class Pieces {
 
     private fun remove(piece: Piece, enemyColor: Color) {
         pieces[enemyColor]!!.remove(piece)
+    }
+
+    fun onlyCanMove(color: Color): List<Piece> {
+        // TODO: implement that
+        return color(color).filter { it.canMove() }
     }
 }

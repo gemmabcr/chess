@@ -12,7 +12,7 @@ class UserPlayer(
 ) : Player(color) {
     override fun pieceMovement(pieces: List<Piece>): Journey {
         val piece: Piece = ui.askPiece(pieces)
-        val square: Square = ui.askSquare(piece.mainMove().allSquares())
-        return Journey(Pair(piece.getPosition(), square))
+        val square: Square = ui.askSquare(piece.allPossibleMoves())
+        return piece.getJourney(square)
     }
 }
