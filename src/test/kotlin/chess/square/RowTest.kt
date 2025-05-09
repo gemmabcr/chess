@@ -9,50 +9,70 @@ internal class RowTest {
 
     @Test
     fun givenRowWhenMaxForwardMovementThenReturnNumberOfMaxMovementToTheForward() {
-        assertEquals(Row.EIGHT.maxForwardMovement(), 0)
-        assertEquals(Row.SEVEN.maxForwardMovement(), 1)
-        assertEquals(Row.SIX.maxForwardMovement(), 2)
-        assertEquals(Row.FIVE.maxForwardMovement(), 3)
-        assertEquals(Row.FOUR.maxForwardMovement(), 4)
-        assertEquals(Row.THREE.maxForwardMovement(), 5)
-        assertEquals(Row.TWO.maxForwardMovement(), 6)
-        assertEquals(Row.ONE.maxForwardMovement(), 7)
+        val maxForwardMovement = mapOf(
+            Row.EIGHT to 0,
+            Row.SEVEN to 1,
+            Row.SIX to 2,
+            Row.FIVE to 3,
+            Row.FOUR to 4,
+            Row.THREE to 5,
+            Row.TWO to 6,
+            Row.ONE to 7,
+        )
+        maxForwardMovement.forEach { (row, max) ->
+            assertEquals(max, row.maxForwardMovement())
+        }
     }
 
     @Test
     fun givenRowWhenMaxBackwardMovementThenReturnNumberOfMaxMovementToTheBackward() {
-        assertEquals(Row.EIGHT.maxBackwardMovement(), 7)
-        assertEquals(Row.SEVEN.maxBackwardMovement(), 6)
-        assertEquals(Row.SIX.maxBackwardMovement(), 5)
-        assertEquals(Row.FIVE.maxBackwardMovement(), 4)
-        assertEquals(Row.FOUR.maxBackwardMovement(), 3)
-        assertEquals(Row.THREE.maxBackwardMovement(), 2)
-        assertEquals(Row.TWO.maxBackwardMovement(), 1)
-        assertEquals(Row.ONE.maxBackwardMovement(), 0)
+        val maxBackwardMovement = mapOf(
+            Row.EIGHT to 7,
+            Row.SEVEN to 6,
+            Row.SIX to 5,
+            Row.FIVE to 4,
+            Row.FOUR to 3,
+            Row.THREE to 2,
+            Row.TWO to 1,
+            Row.ONE to 0,
+        )
+        maxBackwardMovement.forEach { (row, max) ->
+            assertEquals(max, row.maxBackwardMovement())
+        }
     }
 
     @Test
     fun givenRowWhenCanMoveBackwardThenReturnTrueIfItIsNotLastRow() {
-        assertTrue(Row.EIGHT.canMoveBackward())
-        assertTrue(Row.SEVEN.canMoveBackward())
-        assertTrue(Row.SIX.canMoveBackward())
-        assertTrue(Row.FIVE.canMoveBackward())
-        assertTrue(Row.FOUR.canMoveBackward())
-        assertTrue(Row.THREE.canMoveBackward())
-        assertTrue(Row.TWO.canMoveBackward())
-        assertFalse(Row.ONE.canMoveBackward())
+        val canMoveBackward = mapOf(
+            Row.EIGHT to true,
+            Row.SEVEN to true,
+            Row.SIX to true,
+            Row.FIVE to true,
+            Row.FOUR to true,
+            Row.THREE to true,
+            Row.TWO to true,
+            Row.ONE to false,
+        )
+        canMoveBackward.forEach { (row, canMove) ->
+            assertEquals(canMove, row.canMoveBackward())
+        }
     }
 
     @Test
     fun givenRowWhenCanMoveForwardThenReturnTrueIfItIsNotFirstRow() {
-        assertFalse(Row.EIGHT.canMoveForward())
-        assertTrue(Row.SEVEN.canMoveForward())
-        assertTrue(Row.SIX.canMoveForward())
-        assertTrue(Row.FIVE.canMoveForward())
-        assertTrue(Row.FOUR.canMoveForward())
-        assertTrue(Row.THREE.canMoveForward())
-        assertTrue(Row.TWO.canMoveForward())
-        assertTrue(Row.ONE.canMoveForward())
+        val canMoveForward = mapOf(
+            Row.EIGHT to false,
+            Row.SEVEN to true,
+            Row.SIX to true,
+            Row.FIVE to true,
+            Row.FOUR to true,
+            Row.THREE to true,
+            Row.TWO to true,
+            Row.ONE to true,
+        )
+        canMoveForward.forEach { (row, canMove) ->
+            assertEquals(canMove, row.canMoveForward())
+        }
     }
 
     @Test

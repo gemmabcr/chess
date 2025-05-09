@@ -1,6 +1,8 @@
 package chess.square
 
 import chess.Color
+import kotlin.collections.component1
+import kotlin.collections.component2
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -10,6 +12,7 @@ internal class SquareTest {
         val column = Column.A
         val row = Row.ONE
         val square = Square(column, row)
+
         assertEquals(square.column, column)
         assertEquals(square.row, row)
         assertEquals(square.color, Color.BLACK)
@@ -18,21 +21,35 @@ internal class SquareTest {
     @Test
     fun givenSquareWhenDirectionThenReturnDirectionWithDestination() {
         val square = Square(Column.D, Row.FOUR)
-        assertEquals(Journey(Pair(square, Square(Column.D, Row.FIVE))).direction(), Direction.FORWARD)
-        assertEquals(Journey(Pair(square, Square(Column.D, Row.THREE))).direction(), Direction.BACKWARD)
-        assertEquals(Journey(Pair(square, Square(Column.C, Row.FOUR))).direction(), Direction.LEFT)
-        assertEquals(Journey(Pair(square, Square(Column.E, Row.FOUR))).direction(), Direction.RIGHT)
-        assertEquals(Journey(Pair(square, Square(Column.C, Row.FIVE))).direction(), Direction.FORWARD_LEFT)
-        assertEquals(Journey(Pair(square, Square(Column.E, Row.FIVE))).direction(), Direction.FORWARD_RIGHT)
-        assertEquals(Journey(Pair(square, Square(Column.C, Row.THREE))).direction(), Direction.BACKWARD_LEFT)
-        assertEquals(Journey(Pair(square, Square(Column.E, Row.THREE))).direction(), Direction.BACKWARD_RIGHT)
+        val directions = mapOf(
+            Square(Column.D, Row.FIVE) to Direction.FORWARD,
+            Square(Column.D, Row.THREE) to Direction.BACKWARD,
+            Square(Column.C, Row.FOUR) to Direction.LEFT,
+            Square(Column.E, Row.FOUR) to Direction.RIGHT,
+            Square(Column.C, Row.FIVE) to Direction.FORWARD_LEFT,
+            Square(Column.E, Row.FIVE) to Direction.FORWARD_RIGHT,
+            Square(Column.C, Row.THREE) to Direction.BACKWARD_LEFT,
+            Square(Column.E, Row.THREE) to Direction.BACKWARD_RIGHT,
+        )
+
+        directions.forEach { (goal, direction) ->
+            assertEquals(createJourney(square, goal).direction(), direction)
+        }
     }
+
+    private fun createJourney(initial: Square, final: Square): Journey = Journey(Pair(initial, final))
 
     @Test
     fun givenSquareWhenSquaresBetweenThenNumberOfSquaresBetween() {
         val square = Square(Column.D, Row.FOUR)
-        assertEquals(Journey(Pair(square, Square(Column.F, Row.TWO))).squaresBetweenTotal(), 1)
-        assertEquals(Journey(Pair(square, Square(Column.G, Row.FOUR))).squaresBetweenTotal(), 2)
-        assertEquals(Journey(Pair(square, Square(Column.D, Row.EIGHT))).squaresBetweenTotal(), 3)
+        val squaresBetween = mapOf(
+            Square(Column.F, Row.TWO) to 1,
+            Square(Column.G, Row.FOUR) to 2,
+            Square(Column.D, Row.EIGHT) to 3,
+        )
+
+        squaresBetween.forEach { (goal, squares) ->
+            assertEquals(createJourney(square, goal).squaresBetweenTotal(), squares)
+        }
     }
 }

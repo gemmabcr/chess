@@ -1,5 +1,6 @@
 package chess.square
 
+import kotlin.collections.component1
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -16,50 +17,70 @@ internal class ColumnTest {
 
     @Test
     fun givenColumnWhenMaxLeftMovementThenReturnNumberOfMaxMovementToTheLeft() {
-        assertEquals(Column.A.maxLeftMovement(), 0)
-        assertEquals(Column.B.maxLeftMovement(), 1)
-        assertEquals(Column.C.maxLeftMovement(), 2)
-        assertEquals(Column.D.maxLeftMovement(), 3)
-        assertEquals(Column.E.maxLeftMovement(), 4)
-        assertEquals(Column.F.maxLeftMovement(), 5)
-        assertEquals(Column.G.maxLeftMovement(), 6)
-        assertEquals(Column.H.maxLeftMovement(), 7)
+        val maxLeftMovement = mapOf(
+            Column.A to 0,
+            Column.B to 1,
+            Column.C to 2,
+            Column.D to 3,
+            Column.E to 4,
+            Column.F to 5,
+            Column.G to 6,
+            Column.H to 7,
+        )
+        maxLeftMovement.forEach { (column, max) ->
+            assertEquals(max, column.maxLeftMovement())
+        }
     }
 
     @Test
     fun givenColumnWhenMaxRightMovementThenReturnNumberOfMaxMovementToTheRight() {
-        assertEquals(Column.A.maxRightMovement(), 7)
-        assertEquals(Column.B.maxRightMovement(), 6)
-        assertEquals(Column.C.maxRightMovement(), 5)
-        assertEquals(Column.D.maxRightMovement(), 4)
-        assertEquals(Column.E.maxRightMovement(), 3)
-        assertEquals(Column.F.maxRightMovement(), 2)
-        assertEquals(Column.G.maxRightMovement(), 1)
-        assertEquals(Column.H.maxRightMovement(), 0)
+        val maxRightMovement = mapOf(
+            Column.A to 7,
+            Column.B to 6,
+            Column.C to 5,
+            Column.D to 4,
+            Column.E to 3,
+            Column.F to 2,
+            Column.G to 1,
+            Column.H to 0,
+        )
+        maxRightMovement.forEach { (column, max) ->
+            assertEquals(max, column.maxRightMovement())
+        }
     }
 
     @Test
     fun givenColumnWhenCanMoveRightThenReturnTrueIfItIsNotLastColumn() {
-        assertTrue(Column.A.canMoveRight())
-        assertTrue(Column.B.canMoveRight())
-        assertTrue(Column.C.canMoveRight())
-        assertTrue(Column.D.canMoveRight())
-        assertTrue(Column.E.canMoveRight())
-        assertTrue(Column.F.canMoveRight())
-        assertTrue(Column.G.canMoveRight())
-        assertFalse(Column.H.canMoveRight())
+        val canMoveRight = mapOf(
+            Column.A to true,
+            Column.B to true,
+            Column.C to true,
+            Column.D to true,
+            Column.E to true,
+            Column.F to true,
+            Column.G to true,
+            Column.H to false,
+        )
+        canMoveRight.forEach { (column, canMove) ->
+            assertEquals(canMove, column.canMoveRight())
+        }
     }
 
     @Test
     fun givenColumnWhenCanMoveLeftThenReturnTrueIfItIsNotFirstColumn() {
-        assertFalse(Column.A.canMoveLeft())
-        assertTrue(Column.B.canMoveLeft())
-        assertTrue(Column.C.canMoveLeft())
-        assertTrue(Column.D.canMoveLeft())
-        assertTrue(Column.E.canMoveLeft())
-        assertTrue(Column.F.canMoveLeft())
-        assertTrue(Column.G.canMoveLeft())
-        assertTrue(Column.H.canMoveLeft())
+        val canMoveLeft = mapOf(
+            Column.A to false,
+            Column.B to true,
+            Column.C to true,
+            Column.D to true,
+            Column.E to true,
+            Column.F to true,
+            Column.G to true,
+            Column.H to true,
+        )
+        canMoveLeft.forEach { (column, canMove) ->
+            assertEquals(canMove, column.canMoveLeft())
+        }
     }
 
     @Test
