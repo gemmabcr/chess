@@ -18,15 +18,7 @@ class Ui {
         return piece
     }
 
-    private fun getPieceName(piece: Piece): String = when (piece) {
-        is King -> "King"
-        is Queen -> "Queen"
-        is Bishop -> "Bishop"
-        is Knight -> "Knight"
-        is Rook -> "Rook"
-        is Pawn -> "Pawn"
-        else -> throw Error("Incorrect piece")
-    }
+    private fun getPieceName(piece: Piece): String = piece.javaClass.simpleName
 
     fun askSquare(mainMove: List<Square>): Square {
         print("Write the number of the square you want to move:")
@@ -53,12 +45,13 @@ class Ui {
             }
             val row = squares.filter { uiSquare -> uiSquare.isRowIndex(i) }
             for (j in 0 .. 7) {
+                val printNumbers = { print(""" ${i+1} """) }
                 if (j == 0) {
-                    print(""" ${8 - i} """)
+                    printNumbers()
                 }
                 print(""" ${row[j].icon.icon} """)
                 if (j == 7) {
-                    print(""" ${8 - i} """)
+                    printNumbers()
                 }
             }
             println()

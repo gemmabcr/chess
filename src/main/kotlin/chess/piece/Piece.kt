@@ -4,7 +4,7 @@ import chess.Color
 import chess.square.*
 import java.lang.Error
 
-abstract class Piece(
+sealed class Piece(
     private val color: Color,
     protected var square: Square,
     private val directions: List<Direction>,
