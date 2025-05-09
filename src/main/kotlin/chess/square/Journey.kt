@@ -40,9 +40,9 @@ class Journey(
         return Direction.FORWARD_RIGHT
     }
 
-    private fun getDifferenceRow() = destination().getRow().ordinal - origin().getRow().ordinal
+    private fun getDifferenceRow() = destination().row.ordinal - origin().row.ordinal
 
-    private fun getDifferenceCol() = destination().getColumn().ordinal - origin().getColumn().ordinal
+    private fun getDifferenceCol() = destination().column.ordinal - origin().column.ordinal
 
     fun squaresBetweenTotal(): Int {
         val direction: Direction = direction()

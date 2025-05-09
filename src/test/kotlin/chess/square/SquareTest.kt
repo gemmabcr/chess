@@ -10,9 +10,9 @@ internal class SquareTest {
         val column = Column.A
         val row = Row.ONE
         val square = Square(column, row)
-        assertEquals(square.getColumn(), column)
-        assertEquals(square.getRow(), row)
-        assertEquals(square.getColor(), Color.BLACK)
+        assertEquals(square.column, column)
+        assertEquals(square.row, row)
+        assertEquals(square.color, Color.BLACK)
     }
 
     @Test

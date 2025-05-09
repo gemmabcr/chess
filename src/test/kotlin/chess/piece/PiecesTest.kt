@@ -24,16 +24,16 @@ internal class PiecesTest {
         assertEquals(pieces.color(Color.BLACK).size, 16)
         assertEquals(pieces.color(Color.WHITE).size, 16)
         assertTrue(blackPawns.all { isInPenultimateRow(it.getPosition()) })
-        assertEquals(blackPawns.map { it.getPosition().getColumn() }.toSet().size, Column.all().size)
+        assertEquals(blackPawns.map { it.getPosition().column }.toSet().size, Column.all().size)
         assertTrue(blackMain.all { isInLastRow(it.getPosition()) })
         assertTrue(whitePawns.all { isInSecondRow(it.getPosition()) })
-        assertEquals(whitePawns.map { it.getPosition().getColumn() }.toSet().size, Column.all().size)
+        assertEquals(whitePawns.map { it.getPosition().column }.toSet().size, Column.all().size)
         assertTrue(whiteMain.all { isInFirstRow(it.getPosition()) })
         assertTrue(allPieces.filterIsInstance<Rook>().all { isInFirstColumn(it.getPosition()) })
         assertTrue(allPieces.filterIsInstance<Knight>().all { isInSecondColumn(it.getPosition()) })
         assertTrue(allPieces.filterIsInstance<Bishop>().all { isInThirdColumn(it.getPosition()) })
-        assertTrue(allPieces.filterIsInstance<Queen>().all { it.getPosition().getColumn().`is`(Column.D) })
-        assertTrue(allPieces.filterIsInstance<King>().all { it.getPosition().getColumn().`is`(Column.E) })
+        assertTrue(allPieces.filterIsInstance<Queen>().all { it.getPosition().column.`is`(Column.D) })
+        assertTrue(allPieces.filterIsInstance<King>().all { it.getPosition().column.`is`(Column.E) })
     }
 
     @Test
@@ -42,16 +42,16 @@ internal class PiecesTest {
         assertFalse(pieces.isValid(Journey(Pair(piece.getPosition(), Square(Column.A, Row.FIVE)))))
     }
 
-    private fun isInLastRow(position: Square) = position.getRow().`is`(Row.EIGHT)
-    private fun isInPenultimateRow(position: Square) = position.getRow().`is`(Row.SEVEN)
-    private fun isInSecondRow(position: Square) = position.getRow().`is`(Row.TWO)
-    private fun isInFirstRow(position: Square) = position.getRow().`is`(Row.ONE)
+    private fun isInLastRow(position: Square) = position.row.`is`(Row.EIGHT)
+    private fun isInPenultimateRow(position: Square) = position.row.`is`(Row.SEVEN)
+    private fun isInSecondRow(position: Square) = position.row.`is`(Row.TWO)
+    private fun isInFirstRow(position: Square) = position.row.`is`(Row.ONE)
     private fun isInFirstColumn(position: Square) =
-        position.getColumn().`is`(Column.A) || position.getColumn().`is`(Column.H)
+        position.column.`is`(Column.A) || position.column.`is`(Column.H)
 
     private fun isInSecondColumn(position: Square) =
-        position.getColumn().`is`(Column.B) || position.getColumn().`is`(Column.G)
+        position.column.`is`(Column.B) || position.column.`is`(Column.G)
 
     private fun isInThirdColumn(position: Square) =
-        position.getColumn().`is`(Column.C) || position.getColumn().`is`(Column.F)
+        position.column.`is`(Column.C) || position.column.`is`(Column.F)
 }

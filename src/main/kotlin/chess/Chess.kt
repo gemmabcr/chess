@@ -43,7 +43,8 @@ class Chess {
 
     private fun validMove(player: Player) {
         do {
-            val journey: Journey = player.pieceMovement(pieces.onlyCanMove(player.getColor()))
+            val movablePieces: List<Piece> = pieces.onlyCanMove(player.color)
+            val journey: Journey = player.pieceMovement(movablePieces)
             val validMove: Boolean = pieces.isValid(journey)
             if (validMove) {
                 val piece: Piece = pieces.allPieces().first { it.hasPosition(journey.origin()) }

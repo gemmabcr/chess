@@ -4,8 +4,8 @@ class MovementController(
     private val direction: Direction,
     private val origin: Square
 ) {
-    private fun column(): Column = origin.getColumn()
-    private fun row(): Row = origin.getRow()
+    private fun column(): Column = origin.column
+    private fun row(): Row = origin.row
 
     fun withDirection(direction: Direction): MovementController = MovementController(direction, this.origin)
 
@@ -30,16 +30,15 @@ class MovementController(
         else -> firstValue
     }
 
-    fun canMove(): Boolean = when {
-        direction `is` Direction.FORWARD -> canMoveForward()
-        direction `is` Direction.LEFT -> canMoveLeft()
-        direction `is` Direction.BACKWARD -> canMoveBackward()
-        direction `is` Direction.RIGHT -> canMoveRight()
-        direction `is` Direction.FORWARD_LEFT -> canMoveForward() && canMoveLeft()
-        direction `is` Direction.BACKWARD_LEFT -> canMoveBackward() && canMoveLeft()
-        direction `is` Direction.BACKWARD_RIGHT -> canMoveBackward() && canMoveRight()
-        direction `is` Direction.FORWARD_RIGHT -> canMoveForward() && canMoveRight()
-        else -> false
+    fun canMove(): Boolean = when (direction) {
+        Direction.FORWARD -> canMoveForward()
+        Direction.LEFT -> canMoveLeft()
+        Direction.BACKWARD -> canMoveBackward()
+        Direction.RIGHT -> canMoveRight()
+        Direction.FORWARD_LEFT -> canMoveForward() && canMoveLeft()
+        Direction.BACKWARD_LEFT -> canMoveBackward() && canMoveLeft()
+        Direction.BACKWARD_RIGHT -> canMoveBackward() && canMoveRight()
+        Direction.FORWARD_RIGHT -> canMoveForward() && canMoveRight()
     }
 
     private fun canMoveForward(): Boolean = row().canMoveForward()

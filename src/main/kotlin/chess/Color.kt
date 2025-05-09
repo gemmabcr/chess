@@ -2,27 +2,13 @@ package chess
 
 import chess.square.Row
 
-enum class Color {
-    BLACK, WHITE;
+enum class Color(val mainPieceRow: Row, val pawnsRow: Row) {
+    BLACK(Row.EIGHT, Row.SEVEN),
+    WHITE(Row.ONE, Row.TWO)
+    ;
 
-    fun rowMainPiece(): Row {
-        if (this == WHITE) {
-            return Row.ONE
-        }
-        return Row.EIGHT
-    }
-
-    fun rowPawns(): Row {
-        if (this == WHITE) {
-            return Row.TWO
-        }
-        return Row.SEVEN
-    }
-
-    fun opposite(): Color {
-        return when (this) {
-            BLACK -> WHITE
-            WHITE -> BLACK
-        }
+    fun opposite(): Color = when (this) {
+        BLACK -> WHITE
+        WHITE -> BLACK
     }
 }

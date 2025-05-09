@@ -11,9 +11,9 @@ data class MainMovement(
         }
         moves[direction]!!.add(square)
         if (direction `is` Direction.FORWARD || direction `is` Direction.BACKWARD) {
-            moves[direction]!!.sortBy { it.getRow() }
+            moves[direction]!!.sortBy { it.row }
         } else {
-            moves[direction]!!.sortBy { it.getColumn() }
+            moves[direction]!!.sortBy { it.column }
         }
     }
 

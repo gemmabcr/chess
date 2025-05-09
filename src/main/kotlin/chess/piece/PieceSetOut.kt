@@ -10,17 +10,17 @@ class PieceSetOut {
         fun setUp(color: Color): MutableList<Piece> = Column.all()
             .flatMap { column: Column ->
                 listOf(
-                    mainPiece(color, column, color.rowMainPiece()),
-                    Pawn(color, Square(column, color.rowPawns())),
+                    mainPiece(color, column, color.mainPieceRow),
+                    Pawn(color, Square(column, color.pawnsRow)),
                 )
             }.toMutableList()
 
-        private fun mainPiece(color: Color, column: Column, row: Row): Piece = when {
-            column `is` Column.A || column `is` Column.H -> Rook(color, Square(column, row))
-            column `is` Column.B || column `is` Column.G -> Knight(color, Square(column, row))
-            column `is` Column.C || column `is` Column.F -> Bishop(color, Square(column, row))
-            column `is` Column.D -> Queen(color, Square(column, row))
-            else -> King(color, Square(column, row))
+        private fun mainPiece(color: Color, column: Column, row: Row): Piece = when (column) {
+            Column.A, Column.H -> Rook(color, Square(column, row))
+            Column.B, Column.G -> Knight(color, Square(column, row))
+            Column.C, Column.F -> Bishop(color, Square(column, row))
+            Column.D -> Queen(color, Square(column, row))
+            Column.E -> King(color, Square(column, row))
         }
     }
 }

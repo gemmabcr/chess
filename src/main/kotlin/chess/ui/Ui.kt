@@ -6,12 +6,10 @@ import chess.piece.*
 import chess.player.Player
 import chess.square.Column
 import chess.square.Square
-import java.lang.Error
 
 class Ui {
     fun askPiece(pieces: List<Piece>): Piece {
-        print("Write the number of the piece you want to move:")
-        println()
+        print("Write the number of the piece you want to move:\n")
         pieces.forEachIndexed { index, piece -> println("${index}-> ${getPieceName(piece)}. ${piece.getPosition()} ") }
         val piece = pieces[readln().toInt()]
         println("You are moving ${getPieceName(piece)}. ${piece.getPosition()}")
@@ -21,8 +19,7 @@ class Ui {
     private fun getPieceName(piece: Piece): String = piece.javaClass.simpleName
 
     fun askSquare(mainMove: List<Square>): Square {
-        print("Write the number of the square you want to move:")
-        println()
+        print("Write the number of the square you want to move:\n")
         mainMove.forEachIndexed { index, move -> println("${index}-> $move ") }
         val square = mainMove[readln().toInt()]
         println("You are moving to $square")
@@ -35,9 +32,9 @@ class Ui {
 
     fun print(board: List<List<Square>>, pieces: List<Piece>) {
         val squares: MutableList<UiSquare> = mutableListOf()
-        board.forEach { row -> row.forEach { square -> squares.add(UiSquare(getSquareColor(square.getColor()), square)) } }
+        board.forEach { row -> row.forEach { square -> squares.add(UiSquare(getSquareColor(square.color), square)) } }
         pieces.forEach { piece -> squares.find { square -> square.`is`(piece.getPosition()) }!!.changeIcon(piece) }
-        newLine()
+        boardBorderLine()
         for (i in 0 .. 7) {
             if (i == 0) {
                 printColumnValues()
@@ -59,19 +56,12 @@ class Ui {
                 printColumnValues()
             }
         }
-        newLine()
+        boardBorderLine()
     }
 
-    fun print(player: Player) {
-        println()
-        println("It is ${player.getColor()} player turn")
-    }
+    fun print(player: Player) = println("\nIt is ${player.color} player turn")
 
-    private fun newLine() {
-        println()
-        println("------------------------------")
-        println()
-    }
+    private fun boardBorderLine() = println("\n------------------------------")
 
     private fun getSquareColor(color: Color): UiIcon = when (color) {
         Color.BLACK -> UiIcon.BLACK_SQUARE
